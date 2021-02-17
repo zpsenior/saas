@@ -1,0 +1,51 @@
+package com.saas.auth.vo;
+
+import java.util.Date;
+import java.util.List;
+
+import com.zpsenior.graphql4j.annotation.Field;
+import com.zpsenior.graphql4j.annotation.Join;
+import com.zpsenior.graphql4j.annotation.Type;
+
+import lombok.Data;
+
+@Data
+@Type(desc="租户人员表")
+public class TenantStaff {
+
+	@Field(isKey=true, desc="租户ID")
+	private String tenantId;
+
+	@Field(isKey=true, desc="员工ID")
+	private long staffId;
+	
+	@Field(desc="用户ID")
+	private long userId;
+
+	@Field(desc="微信openid")
+	private String openid;
+
+	@Field(desc="登录名")
+	private String loginName;
+
+	@Field(desc="昵称")
+	private String nickname;
+
+	@Field(desc="联系电话")
+	private String mobileno;
+
+	@Field(desc="电子油箱")
+	private String email;
+
+	@Field(desc="状态")
+	private UserStatus status;
+
+	@Field(desc="创建日期")
+	private Date createDate;
+	
+	@Field(desc="用户角色ID")
+	private String[] staffRoles;
+	
+	@Join(bind = "queryStaffRoleList", params = { "tenantId", "staffRoles" })
+	private List<TenantStaffRole> roles;
+}
