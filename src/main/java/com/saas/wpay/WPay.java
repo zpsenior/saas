@@ -1,6 +1,6 @@
 package com.saas.wpay;
 
-import java.security.PrivateKey;
+import java.io.ByteArrayOutputStream;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -12,26 +12,37 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.saas.pub.SignUtils;
 
-public class WPay {
+@Component
+public class WPay implements Const {
 	
 	private final static String baseUrl = "https://api.mch.weixin.qq.com";
 	
+	@Value("${mchid}")
 	private String mchid;
 	
-	private PrivateKey privateKey;
-	
+	@Value("${serialNo}")
 	private String serialNo;
+
+	@Autowired
+	private Certificate cert;
 	
-	public void execute(WPayRequest request) throws Exception{
-		String signature = request.signature(privateKey);
-		String urlStr = baseUrl + request.getRequestStr();
-		String body = request.getBody();
-		String nonceStr = request.getNonceStr();
-		long timestamp = request.getTimestamp();
+	
+	public JsonNode execute(WPayRequest request) throws Exception{
+
+		String nonceStr = SignUtils.randomString(32);
+		long timestamp  = System.currentTimeMillis()/1000;
+		String method = request.getMethod();
+		String body = request.buildBody();
+		String requestStr = request.buildRequestStr();
+		String signature = cert.doSign(method, requestStr, body, nonceStr, timestamp);
 		StringBuffer sb = new StringBuffer();
 		sb.append("WECHATPAY2-SHA256-RSA2048 ");
 		sb.append("mchid=").append(mchid);
@@ -45,15 +56,15 @@ public class WPay {
 		
 		CloseableHttpResponse response;
 		
-		String method = request.getMethod();
+		String urlStr = baseUrl + requestStr;
 		
-		if(method.equals(WPayRequest.GET)) {
+		if(method.equals(GET)) {
 			HttpGet httpGet = new HttpGet(urlStr);
 			
 			httpGet.setHeader("Authorization", Authorization);
 
 			response = httpClient.execute(httpGet);
-		}else if(method.equals(WPayRequest.POST)) {
+		}else if(method.equals(POST)) {
 			HttpPost httpPost = new HttpPost(urlStr);
 			
 			httpPost.setHeader("Authorization", Authorization);
@@ -64,10 +75,13 @@ public class WPay {
 			httpPost.setEntity(entity);
 			
 			response = httpClient.execute(httpPost);
-		}else if(method.equals(WPayRequest.PUT)) {
+		}else if(method.equals(PUT)) {
 			HttpPut httpPut = new HttpPut(urlStr);
 			
 			httpPut.setHeader("Authorization", Authorization);
+			
+			StringEntity entity = new StringEntity(body);
+			entity.setContentType("UTF-8");
 			
 			response = httpClient.execute(httpPut);
 		}else {
@@ -83,10 +97,26 @@ public class WPay {
 		
 		HttpEntity responseEntity = response.getEntity();
 		
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		
+		responseEntity.writeTo(os);
+		
+		os.flush();
+		
+		body = os.toString("UTF-8");
+		
+		nonceStr = response.getFirstHeader("Wechatpay-Nonce").getValue();
+		timestamp = Long.parseLong(response.getFirstHeader("Wechatpay-Timestamp").getValue());
+		signature = response.getFirstHeader("Wechatpay-Signature").getValue();
+		
+		if(!cert.doVerify(timestamp, nonceStr, body, signature)) {
+			throw new RuntimeException("verify error, signature:" + signature);
+		}
+		
 		ObjectMapper mapper = new ObjectMapper();
 		
-		JsonNode root = mapper.readTree(responseEntity.getContent());
-
+		JsonNode root = mapper.readTree(body);
+		
+		return root;
 	}
-
 }

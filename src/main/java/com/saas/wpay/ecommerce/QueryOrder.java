@@ -2,6 +2,13 @@ package com.saas.wpay.ecommerce;
 
 import com.saas.wpay.WPayRequest;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class QueryOrder extends WPayRequest{
 	
 	protected QueryOrder() {

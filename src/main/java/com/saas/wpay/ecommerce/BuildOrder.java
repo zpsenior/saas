@@ -2,7 +2,27 @@ package com.saas.wpay.ecommerce;
 
 import com.saas.wpay.WPayRequest;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class BuildOrder extends WPayRequest {
+	
+	@Data
+	public class Amount{
+		
+		private long total;
+		private String currency;
+	}
+	
+	@Data
+	public class Payer{
+		private String sp_openid;
+		private String sub_openid;
+	}
 	
 	protected BuildOrder() {
 		super("pay/partner/transactions/jsapi", POST);
@@ -25,4 +45,12 @@ public class BuildOrder extends WPayRequest {
 	private String attach;
 	
 	private String notify_url;
+	
+	private String goods_tag;
+
+	private SettleInfo settle_info;
+	
+	private Amount amount;
+	
+	private Payer payer;
 }
