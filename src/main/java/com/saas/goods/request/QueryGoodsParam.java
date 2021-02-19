@@ -13,6 +13,10 @@ import lombok.ToString;
 @Input("QueryGoodsParam")
 public class QueryGoodsParam extends QueryParam {
 
-	private String goodsName;
+	private String goodsTitle;
+	
+	private String tenantId;
+	
+	private boolean showParent = false;
 
 }

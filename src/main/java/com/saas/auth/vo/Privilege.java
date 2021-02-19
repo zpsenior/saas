@@ -13,7 +13,7 @@ public class Privilege {
 	private long privilegeId;
 
 	@Field(isKey=true, desc="权限范围(0-admin,1-staff)")
-	private byte scope;
+	private PrevilegeScope scope;
 
 	@Field(desc="权限描述", len=100)
 	private String  descript;

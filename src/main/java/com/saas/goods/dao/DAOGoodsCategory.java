@@ -9,7 +9,7 @@ import com.saas.goods.vo.GoodsCategory;
 
 public interface DAOGoodsCategory {
 
-	@Select({"select * from goods_category where tenant_id=#{tenantId}"})
+	@Select({"select * from goods_category where tenant_id=#{tenantId} order by sort"})
 	public List<GoodsCategory> queryGoodsCategoryList(QueryGoodsParam param)throws Exception;
 
 	@Select({"select * from goods_category where tenant_id=#{tenantId} and category_id=#{categoryId}"})

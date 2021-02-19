@@ -9,14 +9,14 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="物流信息表")
+@Type(desc="物流信息表", incr="logisticsId")
 public class Logistics {
 
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 	
 	@Field(isKey=true, desc="物流单号")
-	private String logisticsId;
+	private long logisticsId;
 
 	@Field(desc="订单ID")
 	private long orderId;
@@ -28,7 +28,7 @@ public class Logistics {
 	private String expressId;
 	
 	@Field(desc="快递单号", len=50)
-	private String expressNO;
+	private long expressNo;
 
 	@Field(desc="发出日期")
 	private Date sendOutDate;

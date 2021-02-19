@@ -17,7 +17,7 @@ public class PostAddress {
 	private String tenantId;
 
 	@Field(isKey=true, desc="客户ID")
-	private String customerId;
+	private long customerId;
 
 	@Field(isKey=true, desc="地址ID")
 	private long addressId;

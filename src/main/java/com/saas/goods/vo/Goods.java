@@ -43,6 +43,9 @@ public class Goods {
 	@Field(desc="商品类别")
 	private long categoryId;
 	
+	@Join(bind = "queryChildGoodsList", params = { "tenantId", "goodsId" })
+	private List<Goods> children;
+	
 	@Join(bind = "getGoodsCategory", params = { "tenantId", "categoryId" })
 	private GoodsCategory category;
 
@@ -53,7 +56,7 @@ public class Goods {
 	private GoodsEntity entity;
 
 	@Field(desc="商品状态")
-	private GoodsStatus GoodsStatus;
+	private GoodsStatus goodsStatus;
 
 	@Field(desc="创建日期")
 	private Date createDate;

@@ -2,8 +2,11 @@ package com.saas.goods.bo;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.saas.goods.dao.DAOOrder;
+import com.saas.goods.dao.DAOOrderItem;
 import com.saas.goods.request.QueryOrderParam;
 import com.saas.goods.vo.Order;
 import com.saas.goods.vo.OrderItem;
@@ -15,24 +18,37 @@ import com.zpsenior.graphql4j.annotation.Var;
 @Component("QueryGoodsOrder")
 public class QueryGoodsOrder {
 
+	@Autowired
+	private DAOOrder goodsOrder;
+
+	@Autowired
+	private DAOOrderItem goodsOrderItem;
+	
 	@Field("orders")
 	public List<Order> queryOrderList(@Var("params") QueryOrderParam params)throws Exception{
-		return null;
+		return goodsOrder.queryOrderList(params);
 	}
 
 	@Field("order")
-	public OrderItem getOrder(@Var("tenantId") String tenantId, @Var("orderId") long orderId)throws Exception{
-		return null;
+	public Order getOrder(@Var("tenantId") String tenantId, @Var("orderId") long orderId)throws Exception{
+		Order params = new Order();
+		params.setTenantId(tenantId);
+		params.setOrderId(orderId);
+		return goodsOrder.getOrder(params);
 	}
 
 	@Field("orderItems")
 	public List<OrderItem> queryOrderItemList(@Var("params") QueryOrderParam params)throws Exception{
-		return null;
+		return goodsOrderItem.queryOrderItemList(params);
 	}
 
 	@Field("orderItem")
-	public OrderItem getOrderItem(@Var("tenantId") String tenantId, @Var("orderId") long orderId, @Var("itemId") long itemId)throws Exception{
-		return null;
+	public OrderItem getOrderItem(@Var("tenantId") String tenantId, @Var("orderId") long orderId, @Var("itemId") long orderItemId)throws Exception{
+		OrderItem params = new OrderItem();
+		params.setTenantId(tenantId);
+		params.setOrderId(orderId);
+		params.setOrderItemId(orderItemId);
+		return goodsOrderItem.getOrderItem(params);
 	}
 
 }

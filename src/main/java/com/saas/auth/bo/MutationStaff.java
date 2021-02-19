@@ -19,20 +19,20 @@ public class MutationStaff {
 	private DAOStaff staff;
 	
 	@Field
-	public boolean login(@Var("login") LoginParam login)throws Exception{
+	public boolean login(@Var("params") LoginParam params)throws Exception{
 		return false;
 	}
 
 	@Field
-	public boolean changePassword(@Var("login") LoginParam login)throws Exception{
+	public boolean changePassword(@Var("params") LoginParam params)throws Exception{
 		return false;
 	}
 
-	public boolean retrievePassword(@Var("login") LoginParam login)throws Exception{
+	public boolean retrievePassword(@Var("params") LoginParam params)throws Exception{
 		return false;
 	}
 
-	public boolean sendVerifyCode(@Var("login") LoginParam login)throws Exception{
+	public boolean sendVerifyCode(@Var("params") LoginParam params)throws Exception{
 		return false;
 	}
 	

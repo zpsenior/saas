@@ -2,6 +2,7 @@ package com.saas.goods.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import com.saas.goods.request.PostAddressParam;
@@ -20,5 +21,8 @@ public interface DAOPostAddress {
 	
 	
 	public void updatePostAddress(PostAddress address)throws Exception;
+	
+	@Delete({"delete from goods_post_address where tenant_id=#{tenantId} and customer_id=#{customerId} and address_id=#{addressId}"})
+	public void removePostAddress(PostAddress address)throws Exception;
 
 }

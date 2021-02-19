@@ -2,6 +2,7 @@ package com.saas.goods.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import com.saas.goods.request.QueryGoodsParam;
@@ -18,7 +19,7 @@ public interface DAOGoodsFavorite {
 	
 	public void addGoodsFavorite(GoodsFavorite favorite)throws Exception;
 	
-	
-	public void updateGoodsFavorite(GoodsFavorite favorite)throws Exception;
+	@Delete({"delete from goods_favorite where tenant_id=#{tenantId} and customer_id=#{customerId} and goods_id=#{goodsId}"})
+	public void removeGoodsFavorite(GoodsFavorite favorite)throws Exception;
 
 }

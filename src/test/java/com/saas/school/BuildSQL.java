@@ -1,5 +1,7 @@
 package com.saas.school;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,14 +17,18 @@ import com.zpsenior.graphql4j.schema.TypeConfig;
 public class BuildSQL {
 
 	public static void main(String[] args) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
 		try {
-			build(AdminQuery.class, AdminMutation.class);
+			build(pw, AdminQuery.class, AdminMutation.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		pw.flush();
+		System.out.println(sw.toString());
 	}
 	
-	private static void build(Class<?> query, Class<?> mutation)throws Exception {
+	private static void build(PrintWriter pw, Class<?> query, Class<?> mutation)throws Exception {
 		Schema schema = new Schema(query, mutation);
 		System.out.println(schema.toString());
 		for(String name : schema.getTypeNames()) {
@@ -30,22 +36,13 @@ public class BuildSQL {
 				continue;
 			}
 			TypeConfig tc = schema.getTypeConfig(name);
-			name = toUnderscore(name);
 			String className = tc.getBindClass().getName();
-			if(className.startsWith("com.saas.auth")) {
-				name = "auth_" + name;
-			}else if(className.startsWith("com.saas.goods")) {
-				if(!name.startsWith("goods")) {
-					name = "goods_" + name;
-				}
-			}else if(className.startsWith("com.saas.training")) {
-				name = "training_" + name;
-			}
+			name = getTableName(name, className);
 			String desc = tc.getAnn().desc();
 			String incr = toUnderscore(tc.getAnn().incr());
-			System.out.println("#" + desc);
-			System.out.println("drop table `" + name + "`;");
-			System.out.println("create table `" + name + "`(");
+			pw.println("#" + desc);
+			pw.println("drop table `" + name + "`;");
+			pw.println("create table `" + name + "`(");
 			List<String> keys = new ArrayList<>();
 			for(Member member : tc.getMembers()) {
 				if(member.isMethod()|| member.getJoin() != null) {
@@ -56,41 +53,55 @@ public class BuildSQL {
 				if(fld != null && fld.isKey()) {
 					keys.add(fieldName);
 				}
-				System.out.print("   ");
-				System.out.print(String.format("%-17s", "`" + fieldName + "`"));
-				System.out.print("   ");
+				pw.print("   ");
+				pw.print(String.format("%-17s", "`" + fieldName + "`"));
+				pw.print("   ");
 				String autoIncr = "";
 				if(fieldName.equals(incr)) {
 					autoIncr = " auto_increment";
 				}
-				System.out.print(String.format("%-21s", convert(member.getValueTypeName(), fld.len()) + autoIncr));
+				pw.print(String.format("%-21s", convert(member.getValueTypeName(), fld.len()) + autoIncr));
 				if(!"".equals(fld.desc())) {
-					System.out.print(" comment '");
-					System.out.print(fld.desc());
-					System.out.print("'");
+					pw.print(" comment '");
+					pw.print(fld.desc());
+					pw.print("'");
 				}
-				System.out.println(",");
+				pw.println(",");
 			}
-			System.out.print("   ");
+			pw.print("   ");
 			if(!"".equals(incr)) {
-				System.out.print("primary key(`" + incr + "`)");
+				pw.print("primary key(`" + incr + "`)");
 				if(keys.size() > 1) {
-					System.out.println(",");
-					System.out.print("   ");
-					System.out.println("unique  key(" + toStr(keys) + ")");
+					pw.println(",");
+					pw.print("   ");
+					pw.println("unique  key(" + toStr(keys) + ")");
 				}else {
-					System.out.println();
+					pw.println();
 				}
 			}else{
-				System.out.println("primary key(" + toStr(keys) + ")");
+				pw.println("primary key(" + toStr(keys) + ")");
 			}
-			System.out.print(") comment'");
-			System.out.print(desc);
-			System.out.println("';");
+			pw.print(") comment'");
+			pw.print(desc);
+			pw.println("';");
 			if(!"".equals(incr)) {
-				System.out.println("alter table `" + name  + "` AUTO_INCREMENT=10000;");
+				pw.println("alter table `" + name  + "` AUTO_INCREMENT=10000;");
 			}
 		}
+	}
+
+	private static String getTableName(String name, String className) {
+		name = toUnderscore(name);
+		if(className.startsWith("com.saas.auth")) {
+			name = "auth_" + name;
+		}else if(className.startsWith("com.saas.goods")) {
+			if(!name.startsWith("goods")) {
+				name = "goods_" + name;
+			}
+		}else if(className.startsWith("com.saas.training")) {
+			name = "training_" + name;
+		}
+		return name;
 	}
 
 	private static String toStr(List<String> keys) {

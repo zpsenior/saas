@@ -23,20 +23,20 @@ public class MutationAdmin {
 	private VerifyCode verifyCode;
 
 	public boolean login(@Var("login") LoginParam login)throws Exception{
-		return false;
+		return true;
 	}
 
 	public boolean changePassword(@Var("login") LoginParam login)throws Exception{
-		return false;
+		return true;
 	}
 
 	public boolean retrievePassword(@Var("login") LoginParam login)throws Exception{
-		return false;
+		return true;
 	}
 
 	public boolean sendVerifyCode(@Var("mobileno") String mobileno)throws Exception{
 		String code = verifyCode.createCode(mobileno);
-		return false;
+		return true;
 	}
 
 	public void updateAdmin(@Var("params") AdminParam params)throws Exception{

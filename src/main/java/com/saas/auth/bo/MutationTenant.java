@@ -31,6 +31,7 @@ public class MutationTenant {
 	public void approveTenant(@Var("tenantId") String tenantId)throws Exception{
 		Tenant params = new Tenant();
 		params.setTenantId(tenantId);
+		//?
 		tenant.updateTenant(params);
 	}
 
