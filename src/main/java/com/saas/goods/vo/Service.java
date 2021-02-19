@@ -9,7 +9,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="商品服务表")
+@Type(desc="商品服务表", incr="serviceId")
 public class Service {
 
 	@Field(isKey=true, desc="租户ID")
@@ -19,13 +19,13 @@ public class Service {
 	private long serviceId;
 
 	@Field(desc="客户ID")
-	private String customerId;
+	private long customerId;
 
 	@Field(desc="服务员工ID")
-	private String staffId;
+	private long staffId;
 
 	@Field(desc="商品ID")
-	private long goodsId;
+	private String goodsId;
 
 	@Field(desc="订单ID")
 	private long orderId;

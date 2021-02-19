@@ -1,4 +1,4 @@
-package com.saas.wpay.ecommerce;
+package com.saas.wpay.ecommerce.po;
 
 import lombok.Data;
 

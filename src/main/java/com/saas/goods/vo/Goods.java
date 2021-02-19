@@ -10,25 +10,25 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="商品信息表")
+@Type(desc="商品信息表", incr="goodsId")
 public class Goods {
 
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 
 	@Field(isKey=true, desc="商品ID")
-	private String goodsId;
+	private long goodsId;
 
-	@Field(desc="商品名称")
+	@Field(desc="商品名称", len=100)
 	private String goodsTitle;
 
-	@Field(desc="商品描述")
+	@Field(desc="商品描述", len=500)
 	private String description;
 
-	@Field(desc="商品属性")
+	@Field(desc="商品属性", len=100)
 	private String property;
 
-	@Field(desc="商品图片")
+	@Field(desc="商品图片", len=300)
 	private String[] img;
 	
 	@Field(desc="商品价格")
@@ -38,10 +38,10 @@ public class Goods {
 	private int discount;
 
 	@Field(desc="商品系列ID")
-	private String parentId;
+	private long parentId;
 
 	@Field(desc="商品类别")
-	private String categoryId;
+	private long categoryId;
 	
 	@Join(bind = "getGoodsCategory", params = { "tenantId", "categoryId" })
 	private GoodsCategory category;

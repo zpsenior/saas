@@ -8,7 +8,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="教师评价表")
+@Type(desc="教师评价表", incr="reviewId")
 public class TeacherReview {
 
 	@Field(isKey=true, desc="租户ID")
@@ -21,9 +21,9 @@ public class TeacherReview {
 	private long reviewId;
 
 	@Field(desc="评价用户")
-	private String customerId;
+	private long customerId;
 
-	@Field(desc="评价内容")
+	@Field(desc="评价内容", len=300)
 	private String content;
 
 	@Field(desc="创建日期")

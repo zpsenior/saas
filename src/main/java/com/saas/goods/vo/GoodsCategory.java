@@ -10,19 +10,19 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="商品类别表")
+@Type(desc="商品类别表", incr="categoryId")
 public class GoodsCategory {
 
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 
 	@Field(isKey=true, desc="类别ID")
-	private String categoryId;
+	private long categoryId;
 
 	@Field(desc="类别名称")
 	private String name;
 	
-	@Field(desc="类别图片")
+	@Field(desc="类别图片", len=100)
     private String img;
 	
 	@Field(desc="类别排序")

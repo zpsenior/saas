@@ -1,4 +1,4 @@
-package com.saas.wpay.ecommerce;
+package com.saas.wpay.ecommerce.subsidies;
 
 import com.saas.wpay.WPayRequest;
 
@@ -9,18 +9,16 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class QueryOrder extends WPayRequest{
-	
-	protected QueryOrder() {
-		super("pay/partner/transactions/id/{transaction_id}", GET);
-	}
+public class CancelSubsidies extends WPayRequest {
 
-	private String sp_mchid;
+	public CancelSubsidies() {
+		super("ecommerce/subsidies/cancel", POST);
+	}
 	
 	private String sub_mchid;
 	
 	private String transaction_id;
 	
-	private String out_trade_no;
+	private String description;
 
 }

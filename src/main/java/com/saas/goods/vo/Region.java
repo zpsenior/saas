@@ -12,10 +12,10 @@ public class Region {
 	@Field(desc="省")
 	private String province;
 
-	@Field(desc="地市")
+	@Field(desc="地市", len=50)
 	private String city;
 
-	@Field(desc="区县")
+	@Field(desc="区县", len=50)
 	private String county;
 
 }

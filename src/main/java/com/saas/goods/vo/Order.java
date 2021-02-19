@@ -11,7 +11,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="商品订单表")
+@Type(desc="商品订单表", incr="orderId")
 public class Order {
 
 	@Field(isKey=true, desc="租户ID")
@@ -41,13 +41,13 @@ public class Order {
 	@Field(desc="省")
 	private String province;
 
-	@Field(desc="地市")
+	@Field(desc="地市", len=50)
 	private String city;
 
-	@Field(desc="区县")
+	@Field(desc="区县", len=50)
 	private String county;
 
-	@Field(desc="详细地址")
+	@Field(desc="详细地址", len=100)
 	private String detail;
 	
 	@Field(desc="支付日期")

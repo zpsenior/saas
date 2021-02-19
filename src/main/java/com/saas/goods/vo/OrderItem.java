@@ -7,7 +7,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="商品订单明细表")
+@Type(desc="商品订单明细表", incr="orderItemId")
 public class OrderItem {
 
 	@Field(isKey=true, desc="租户ID")
@@ -20,7 +20,7 @@ public class OrderItem {
 	private long orderItemId;
 
 	@Field(desc="商品ID")
-	private String goodsId;
+	private long goodsId;
 
 	@Field(desc="商品序列号")
 	private String serialNo;
@@ -34,7 +34,7 @@ public class OrderItem {
 	@Join(bind = "getGoods", params = { "goodsId" })
 	private Goods goods;
 
-	@Field(desc="物流单号")
+	@Field(desc="物流单号", len=50)
 	private String logisticsId;
 
 	@Join(bind = "getLogistics", params = { "tenantId", "orderId" })

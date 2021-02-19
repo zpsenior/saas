@@ -8,17 +8,17 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="商品评价表")
+@Type(desc="商品评价表", incr="reviewId")
 public class GoodsReview {
 
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 
 	@Field(isKey=true, desc="商品ID")
-	private String goodsId;
+	private long goodsId;
 
 	@Field(isKey=true, desc="商品评价ID")
-	private String reviewId;
+	private long reviewId;
 
 	@Field(desc="客户ID")
 	private String customerId;
@@ -32,10 +32,10 @@ public class GoodsReview {
 	@Field(desc="评价得分")
 	private int score;
 	
-	@Field(desc="评价内容")
+	@Field(desc="评价内容", len=500)
 	private String content;
 	
-	@Field(desc="评价图片")
+	@Field(desc="评价图片", len=500)
 	private String[] imgs;
 
 	@Field(desc="创建日期")

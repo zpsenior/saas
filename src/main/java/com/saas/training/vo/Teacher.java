@@ -19,28 +19,28 @@ public class Teacher {
 	@Field(isKey=true, desc="员工ID")
 	private long staffId;
 
-	@Field(desc="头衔")
+	@Field(desc="头衔", len=50)
 	private String title;
 
-	@Field(desc="性格特征")
+	@Field(desc="性格特征", len=100)
 	private String character;
 
-	@Field(desc="描述介绍")
+	@Field(desc="描述介绍", len=300)
 	private String descript;
 
-	@Field(desc="头像")
+	@Field(desc="头像", len=100)
 	private String portrait;
 	
 	@Field(desc="毕业院校")
 	private String graduation;
 
-	@Field(desc="资格认证")
+	@Field(desc="资格认证", len=100)
 	private String certificate;
 	
-	@Field(desc="专业特长")
+	@Field(desc="专业特长", len=100)
 	private String specialty;
 	
-	@Field(desc="获奖情况")
+	@Field(desc="获奖情况", len=100)
 	private String prize;
 
 	@Field(desc="创建日期")

@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
 @Input("QueryCallbackParam")
-public class QueryCallbackParam extends QueryParam {
+public class QueryPaymentNotifyParam extends QueryParam {
 
 	private String tenantId;
 }

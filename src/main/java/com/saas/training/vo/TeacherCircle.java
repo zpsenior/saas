@@ -8,7 +8,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="教师展现表")
+@Type(desc="教师展现表", incr="circleId")
 public class TeacherCircle {
 
 	@Field(isKey=true, desc="租户ID")
@@ -20,10 +20,10 @@ public class TeacherCircle {
 	@Field(isKey=true, desc="发布ID")
 	private long circleId;
 
-	@Field(desc="内容")
+	@Field(desc="内容", len=300)
 	private String content;
 
-	@Field(desc="图片地址")
+	@Field(desc="图片地址", len=300)
 	private String[] imgs;
 
 	@Field(desc="创建日期")

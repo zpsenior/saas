@@ -18,7 +18,7 @@ public class GoodsFavorite {
 	private String customerId;
 
 	@Field(isKey=true, desc="商品ID")
-	private String goodsId;
+	private long goodsId;
 
 	@Field(desc="创建日期")
 	private Date createDate;

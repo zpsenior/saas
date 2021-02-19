@@ -17,10 +17,10 @@ public class Training {
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 
-	@Field(desc="机构介绍")
+	@Field(desc="机构介绍", len=500)
 	private String descript;
 
-	@Field(desc="机构地址")
+	@Field(desc="机构地址", len=100)
 	private String address;
 
 	@Field(desc="创建日期")

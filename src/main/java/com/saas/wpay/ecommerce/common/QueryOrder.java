@@ -1,4 +1,4 @@
-package com.saas.wpay.ecommerce;
+package com.saas.wpay.ecommerce.common;
 
 import com.saas.wpay.WPayRequest;
 
@@ -9,15 +9,17 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class CloseOrder extends WPayRequest {
+public class QueryOrder extends WPayRequest{
 	
-	protected CloseOrder() {
-		super("pay/partner/transactions/out-trade-no/{out_trade_no}/close", POST);
+	public QueryOrder() {
+		super("pay/partner/transactions/id/{transaction_id}", GET);
 	}
 
 	private String sp_mchid;
 	
 	private String sub_mchid;
+	
+	private String transaction_id;
 	
 	private String out_trade_no;
 

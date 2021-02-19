@@ -1,8 +1,9 @@
-package com.saas.wpay.ecommerce;
+package com.saas.wpay.ecommerce.combine;
 
 import java.util.Date;
 
 import com.saas.wpay.WPayRequest;
+import com.saas.wpay.ecommerce.po.SubOrder;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,14 +12,14 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class BuildCombineOrder extends WPayRequest{
+public class BuildOrder extends WPayRequest{
 	
 	@Data
 	public class PayInfo{
 		private String openid;
 	}
 
-	protected BuildCombineOrder() {
+	public BuildOrder() {
 		super("combine-transactions/jsapi", POST);
 	}
 	

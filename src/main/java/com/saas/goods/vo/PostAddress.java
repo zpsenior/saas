@@ -10,7 +10,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="收货地址表")
+@Type(desc="收货地址表", incr="addressId")
 public class PostAddress {
 
 	@Field(isKey=true, desc="租户ID")
@@ -34,13 +34,13 @@ public class PostAddress {
 	@Field(desc="省")
 	private String province;
 
-	@Field(desc="地市")
+	@Field(desc="地市", len=50)
 	private String city;
 
-	@Field(desc="区县")
+	@Field(desc="区县", len=50)
 	private String county;
 
-	@Field(desc="详细地址")
+	@Field(desc="详细地址", len=100)
 	private String detail;
 
 	@Field(desc="创建日期")

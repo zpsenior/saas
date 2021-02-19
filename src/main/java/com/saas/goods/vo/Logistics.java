@@ -19,15 +19,15 @@ public class Logistics {
 	private String logisticsId;
 
 	@Field(desc="订单ID")
-	private String orderId;
+	private long orderId;
 
 	@Field(desc="客户ID")
-	private String customerId;
+	private long customerId;
 
 	@Field(desc="快递公司")
 	private String expressId;
 	
-	@Field(desc="快递单号")
+	@Field(desc="快递单号", len=50)
 	private String expressNO;
 
 	@Field(desc="发出日期")
@@ -51,7 +51,7 @@ public class Logistics {
 	@Field(desc="区县")
 	private String county;
 
-	@Field(desc="详细地址")
+	@Field(desc="详细地址", len=100)
 	private String detail;
 
 }

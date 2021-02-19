@@ -1,4 +1,4 @@
-package com.saas.wpay.ecommerce;
+package com.saas.wpay.ecommerce.combine;
 
 import com.saas.wpay.WPayRequest;
 
@@ -9,9 +9,9 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class QueryCombineOrder extends WPayRequest  {
+public class QueryOrder extends WPayRequest  {
 
-	protected QueryCombineOrder() {
+	public QueryOrder() {
 		super("combine-transactions/out-trade-no/{combine_out_trade_no}", GET);
 	}
 

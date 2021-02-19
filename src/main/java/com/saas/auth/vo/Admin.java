@@ -10,7 +10,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="管理员表")
+@Type(desc="管理员表", incr="adminId")
 public class Admin {
 
 
@@ -38,7 +38,7 @@ public class Admin {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Field(desc="用户角色ID")
+	@Field(desc="用户角色ID", len=100)
 	private String[] adminRoles;
 	
 	@Join(bind = "queryAdminRoleList", params = { "adminRoles" })

@@ -80,4 +80,14 @@ public class Certificate {
 		return new String(cipher.doFinal(Base64.getDecoder().decode(ciphertext)), "UTF-8");
 	}
 
+	public String sign4JSAPI(String appid, long timestamp, String nonceStr, String body) throws Exception{
+		StringBuffer sb = new StringBuffer();
+		sb.append(appid).append("\n");
+		sb.append(timestamp).append("\n");
+		sb.append(nonceStr).append("\n");
+		sb.append(body).append("\n");
+		String message = sb.toString();
+		String signature = SignUtils.sign(privateKey, message);
+		return signature;
+	}
 }

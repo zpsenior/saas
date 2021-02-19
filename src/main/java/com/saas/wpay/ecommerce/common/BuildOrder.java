@@ -1,6 +1,7 @@
-package com.saas.wpay.ecommerce;
+package com.saas.wpay.ecommerce.common;
 
 import com.saas.wpay.WPayRequest;
+import com.saas.wpay.ecommerce.po.SettleInfo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,7 +25,7 @@ public class BuildOrder extends WPayRequest {
 		private String sub_openid;
 	}
 	
-	protected BuildOrder() {
+	public BuildOrder() {
 		super("pay/partner/transactions/jsapi", POST);
 	}
 

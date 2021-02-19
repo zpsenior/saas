@@ -1,6 +1,8 @@
 package com.saas.school;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.saas.training.AdminMutation;
@@ -28,7 +30,6 @@ public class BuildSQL {
 				continue;
 			}
 			TypeConfig tc = schema.getTypeConfig(name);
-			String keys = "";
 			name = toUnderscore(name);
 			String className = tc.getBindClass().getName();
 			if(className.startsWith("com.saas.auth")) {
@@ -40,8 +41,12 @@ public class BuildSQL {
 			}else if(className.startsWith("com.saas.training")) {
 				name = "training_" + name;
 			}
-			System.out.println("#" + tc.getDesc());
-			System.out.println("create table " + name + "{");
+			String desc = tc.getAnn().desc();
+			String incr = toUnderscore(tc.getAnn().incr());
+			System.out.println("#" + desc);
+			System.out.println("drop table `" + name + "`;");
+			System.out.println("create table `" + name + "`(");
+			List<String> keys = new ArrayList<>();
 			for(Member member : tc.getMembers()) {
 				if(member.isMethod()|| member.getJoin() != null) {
 					continue;
@@ -49,24 +54,56 @@ public class BuildSQL {
 				String fieldName = toUnderscore(member.getName());
 				Field fld = member.getField();
 				if(fld != null && fld.isKey()) {
-					if(!"".equals(keys)) {
-						keys += ", ";
-					}
-					keys += fieldName;
+					keys.add(fieldName);
 				}
 				System.out.print("   ");
-				System.out.print(String.format("%-15s", fieldName));
+				System.out.print(String.format("%-17s", "`" + fieldName + "`"));
 				System.out.print("   ");
-				System.out.print(String.format("%-20s", convert(member.getValueTypeName()) + ","));
-				if(fld != null) {
-					System.out.print(String.format("#%-12s", fld.desc()));
+				String autoIncr = "";
+				if(fieldName.equals(incr)) {
+					autoIncr = " auto_increment";
 				}
-				System.out.println();
+				System.out.print(String.format("%-21s", convert(member.getValueTypeName(), fld.len()) + autoIncr));
+				if(!"".equals(fld.desc())) {
+					System.out.print(" comment '");
+					System.out.print(fld.desc());
+					System.out.print("'");
+				}
+				System.out.println(",");
 			}
 			System.out.print("   ");
-			System.out.println("primary key(" + keys + ")");
-			System.out.println("};");
+			if(!"".equals(incr)) {
+				System.out.print("primary key(`" + incr + "`)");
+				if(keys.size() > 1) {
+					System.out.println(",");
+					System.out.print("   ");
+					System.out.println("unique  key(" + toStr(keys) + ")");
+				}else {
+					System.out.println();
+				}
+			}else{
+				System.out.println("primary key(" + toStr(keys) + ")");
+			}
+			System.out.print(") comment'");
+			System.out.print(desc);
+			System.out.println("';");
+			if(!"".equals(incr)) {
+				System.out.println("alter table `" + name  + "` AUTO_INCREMENT=10000;");
+			}
 		}
+	}
+
+	private static String toStr(List<String> keys) {
+		StringBuffer sb = new StringBuffer();
+		for(String key : keys) {
+			if(sb.length() > 0) {
+				sb.append(", ");
+			}
+			sb.append("`");
+			sb.append(key);
+			sb.append("`");
+		}
+		return sb.toString();
 	}
 
 	private static String toUnderscore(String name) {
@@ -84,9 +121,13 @@ public class BuildSQL {
 		return sb.toString();
 	}
 	
-	private static String convert(String type) {
+	private static String convert(String type, int len) {
 		String value = maps.get(type);
-		return value != null ? value : type;
+		String val = value != null ? value : "char(1)";
+		if(val.equals("varchar()")) {
+			val = "varchar(" + len + ")";
+		}
+		return val;
 	}
 	
 	private static final Map<String, String> maps = new HashMap<>();
@@ -97,7 +138,7 @@ public class BuildSQL {
 		maps.put("byte", "smallint");
 		maps.put("Date", "datetime");
 		maps.put("String", "varchar()");
-		maps.put("String[]", "varchar()");
+		maps.put("String[]", "varchar(1000)");
 	}
 
 }

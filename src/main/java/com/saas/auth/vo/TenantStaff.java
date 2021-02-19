@@ -10,7 +10,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="租户人员表")
+@Type(desc="租户人员表", incr="staffId")
 public class TenantStaff {
 
 	@Field(isKey=true, desc="租户ID")
@@ -22,7 +22,7 @@ public class TenantStaff {
 	@Field(desc="用户ID")
 	private long userId;
 
-	@Field(desc="微信openid")
+	@Field(desc="微信openid", len=64)
 	private String openid;
 
 	@Field(desc="登录名")
@@ -43,7 +43,7 @@ public class TenantStaff {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Field(desc="用户角色ID")
+	@Field(desc="用户角色ID", len=1000)
 	private String[] staffRoles;
 	
 	@Join(bind = "queryStaffRoleList", params = { "tenantId", "staffRoles" })

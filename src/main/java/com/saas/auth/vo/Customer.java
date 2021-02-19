@@ -8,7 +8,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="客户表")
+@Type(desc="客户表", incr="customerId")
 public class Customer {
 
 	@Field(isKey=true, desc="租户ID")
@@ -20,7 +20,7 @@ public class Customer {
 	@Field(desc="用户ID")
 	private long userId;
 
-	@Field(desc="微信openid")
+	@Field(desc="微信openid", len=64)
 	private String openid;
 
 	@Field(desc="登录名")

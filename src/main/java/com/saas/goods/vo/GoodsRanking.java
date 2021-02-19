@@ -15,7 +15,7 @@ public class GoodsRanking {
 	private String tenantId;
 
 	@Field(isKey=true, desc="商品ID")
-	private String goodsId;
+	private long goodsId;
 
 	@Field(desc="浏览次数")
 	private int browseCount;

@@ -8,7 +8,7 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="用户信息表")
+@Type(desc="用户信息表", incr="userId")
 public class UserInfo {
 
 	@Field(isKey=true, desc="租户ID")
@@ -26,7 +26,7 @@ public class UserInfo {
 	@Field(desc="电子油箱")
 	private String email;
 
-	@Field(desc="证件类型")
+	@Field(desc="证件类型", len=2)
 	private String idType;
 
 	@Field(desc="证件号码")

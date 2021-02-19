@@ -1,6 +1,9 @@
 package com.saas.wpay;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -44,6 +47,7 @@ public abstract class WPayRequest implements Const {
 			if(value == null) {
 				continue;
 			}
+			value = convert(value);
 			if(pathArgs.contains(name)) {
 				path = path.replace("{" + name + "}", value.toString());
 				continue;
@@ -74,6 +78,9 @@ public abstract class WPayRequest implements Const {
 		if(cls.isPrimitive()) {
 			return root;
 		}
+		if(root instanceof Date || root instanceof Enum) {
+			return convert(root);
+		}
 		if(cls.isArray()) {
 			Object[] arrays = (Object[])root;
 			Object[] values = new Object[arrays.length];
@@ -94,6 +101,16 @@ public abstract class WPayRequest implements Const {
 			bean.put(name, value);
 		}
 		return bean;
+	}
+
+	private Object convert(Object value) {
+		if(value instanceof Enum) {
+			return ((Enum<?>)value).name();
+		}else if(value instanceof Date) {
+			DateFormat df =new SimpleDateFormat("YYYY-MM-DDTHH:mm:ss.sss+TIMEZONE");
+			return df.format((Date)value);
+		}
+		return value;
 	}
 
 }
