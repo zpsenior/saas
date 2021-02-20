@@ -7,16 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-@Input("QueryOrderParam")
-public class QueryOrderParam extends QueryParam {
-
-	private String tenantId;
-
-	private long customerId;
-
-	private long orderId;
+@Input("QueryLogisticsParam")
+public class QueryLogisticsParam extends QueryParam  {
+	
+	private String tenant;
 
 }

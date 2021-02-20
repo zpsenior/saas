@@ -28,6 +28,9 @@ public class GoodsCategory {
 	@Field(desc="类别排序")
     private int sort;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

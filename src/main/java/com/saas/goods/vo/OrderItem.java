@@ -1,5 +1,7 @@
 package com.saas.goods.vo;
 
+import java.util.Date;
+
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Join;
 import com.zpsenior.graphql4j.annotation.Type;
@@ -39,5 +41,11 @@ public class OrderItem {
 
 	@Join(bind = "getLogistics", params = { "tenantId", "orderId" })
 	private Logistics logistics;
+
+	@Field(desc="修改日期")
+	private Date updateDate;
+
+	@Field(desc="创建日期")
+	private Date createDate;
 
 }

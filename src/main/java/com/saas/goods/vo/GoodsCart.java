@@ -23,6 +23,9 @@ public class GoodsCart {
 	@Field(desc="数量")
 	private int count;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.saas.goods.dao.DAOGoodsCart;
+import com.saas.goods.dao.DAOGoodsFavorite;
 import com.saas.goods.dao.DAOOrder;
 import com.saas.goods.dao.DAOOrderItem;
 import com.saas.goods.request.QueryOrderParam;
+import com.saas.goods.vo.GoodsCart;
+import com.saas.goods.vo.GoodsFavorite;
 import com.saas.goods.vo.Order;
 import com.saas.goods.vo.OrderItem;
 import com.zpsenior.graphql4j.annotation.Field;
@@ -17,6 +21,12 @@ import com.zpsenior.graphql4j.annotation.Var;
 @Type
 @Component("QueryGoodsOrder")
 public class QueryGoodsOrder {
+
+	@Autowired
+	private DAOGoodsFavorite goodsFavorite;
+
+	@Autowired
+	private DAOGoodsCart goodsCart;
 
 	@Autowired
 	private DAOOrder goodsOrder;
@@ -49,6 +59,40 @@ public class QueryGoodsOrder {
 		params.setOrderId(orderId);
 		params.setOrderItemId(orderItemId);
 		return goodsOrderItem.getOrderItem(params);
+	}
+
+	@Field("goodsCarts")
+	public List<GoodsCart> queryGoodsCartList(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
+		QueryOrderParam params = new QueryOrderParam();
+		params.setTenantId(tenantId);
+		params.setCustomerId(customerId);
+		return goodsCart.queryGoodsCartList(params);
+	}
+
+	@Field("goodsCart")
+	public GoodsCart getGoodsCart(@Var("tenantId") String tenantId, @Var("customerId") long customerId, @Var("goodsId") long goodsId)throws Exception{
+		GoodsCart params = new GoodsCart();
+		params.setTenantId(tenantId);
+		params.setCustomerId(customerId);
+		params.setGoodsId(goodsId);
+		return goodsCart.getGoodsCart(params);
+	}
+
+	@Field("goodsFavorites")
+	public List<GoodsFavorite> queryGoodsFavoriteList(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
+		QueryOrderParam params = new QueryOrderParam();
+		params.setTenantId(tenantId);
+		params.setCustomerId(customerId);
+		return goodsFavorite.queryGoodsFavoriteList(params);
+	}
+
+	@Field("goodsFavorite")
+	public GoodsFavorite getGoodsFavorite(@Var("tenantId") String tenantId, @Var("customerId") long customerId, @Var("goodsId") long goodsId)throws Exception{
+		GoodsFavorite params = new GoodsFavorite();
+		params.setTenantId(tenantId);
+		params.setCustomerId(customerId);
+		params.setGoodsId(goodsId);
+		return goodsFavorite.getGoodsFavorite(params);
 	}
 
 }

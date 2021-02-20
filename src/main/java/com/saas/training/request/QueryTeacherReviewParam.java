@@ -1,4 +1,4 @@
-package com.saas.goods.request;
+package com.saas.training.request;
 
 import com.saas.pub.QueryParam;
 import com.zpsenior.graphql4j.annotation.Input;
@@ -10,13 +10,11 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-@Input("QueryOrderParam")
-public class QueryOrderParam extends QueryParam {
-
-	private String tenantId;
-
-	private long customerId;
-
-	private long orderId;
+@Input("QueryTeacherReviewParam")
+public class QueryTeacherReviewParam extends QueryParam {
+	
+	private String tenant;
+	
+	private String staffId;
 
 }

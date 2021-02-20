@@ -40,6 +40,9 @@ public class TenantStaff {
 	@Field(desc="状态")
 	private UserStatus status;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 	

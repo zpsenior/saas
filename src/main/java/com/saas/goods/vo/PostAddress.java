@@ -43,6 +43,9 @@ public class PostAddress {
 	@Field(desc="详细地址", len=100)
 	private String detail;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

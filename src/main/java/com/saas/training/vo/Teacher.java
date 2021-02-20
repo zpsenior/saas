@@ -43,6 +43,12 @@ public class Teacher {
 	@Field(desc="获奖情况", len=100)
 	private String prize;
 
+	@Field(desc="状态")
+	private boolean status;
+
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 	

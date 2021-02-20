@@ -23,6 +23,9 @@ public class Training {
 	@Field(desc="机构地址", len=100)
 	private String address;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 	

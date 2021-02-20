@@ -38,6 +38,9 @@ public class ServiceItem {
 	@Field(desc="图片", len=1000)
 	private String[] imgs;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

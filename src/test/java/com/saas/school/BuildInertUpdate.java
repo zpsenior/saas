@@ -1,6 +1,8 @@
 package com.saas.school;
 
+import java.io.LineNumberReader;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -87,16 +89,41 @@ public class BuildInertUpdate {
 			pw.print("########");
 			pw.print(name);
 			pw.println("########");
-			buildInsert(pw, name, fields);
-			buildUpdate(pw, name, fields, keys);
+			pw.println(wrapper("Insert", buildInsert(name, fields)));
+			pw.println(wrapper("Update", buildUpdate(name, fields, keys)));
+			pw.println(wrapper("Select", buildSelect(name, keys)));
 			pw.println();
 		}
 	}
 
-	private static void buildInsert(PrintWriter pw, String name, List<String> fields) {
+	private static String wrapper(String prefix, String str) throws Exception{
+		LineNumberReader reader = new LineNumberReader(new StringReader(str));
+		StringBuffer sb = new StringBuffer();
+		sb.append("@").append(prefix).append("({\n");
+		while(true) {
+			String line = reader.readLine();
+			if(line == null) {
+				break;
+			}
+			if("".equals(line)) {
+				continue;
+			}
+			sb.append("\"").append(line).append("\",").append("\n");
+		}
+		sb.setLength(sb.length() - 2);
+		sb.append("\n").append("})");
+		return sb.toString();
+	}
+
+	private static String buildInsert(String name, List<String> fields) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
 		pw.println("insert into " + name + "(");
 		boolean first = true;
 		for(String field : fields) {
+			if("updateDate".equals(field)) {
+				continue;
+			}
 			if(!first) {
 				pw.print(",");
 			}else {
@@ -115,6 +142,9 @@ public class BuildInertUpdate {
 		pw.println(")values(");
 		first = true;
 		for(String field : fields) {
+			if("updateDate".equals(field)) {
+				continue;
+			}
 			if(!first) {
 				pw.print(",");
 			}else {
@@ -129,9 +159,12 @@ public class BuildInertUpdate {
 		}
 		pw.println(")");
 		pw.println();
+		return sw.toString();
 	}
 
-	private static void buildUpdate(PrintWriter pw, String name, List<String> fields, Set<String> keys) {
+	private static String buildUpdate(String name, List<String> fields, Set<String> keys) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
 		
 		//pw.print("#");
 		//pw.println(keys);
@@ -142,6 +175,10 @@ public class BuildInertUpdate {
 				continue;
 			}
 			if("createDate".equals(field)) {
+				continue;
+			}
+			if("updateDate".equals(field)) {
+				pw.println(String.format("   <if test='true'>update_date=now()</if>", field));
 				continue;
 			}
 			String var = String.format("#{%s}", field);
@@ -165,5 +202,28 @@ public class BuildInertUpdate {
 			first = false;
 		}
 		pw.println();
+		return sw.toString();
+	}
+
+	private static String buildSelect(String name, Set<String> keys) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+
+		pw.print("select * from " + name);
+		boolean first = true;
+		for(String key : keys) {
+			if(first) {
+				pw.print(" where ");
+			}else {
+				pw.print(" and ");
+			}
+			pw.print(toUnderscore(key));
+			pw.print("=");
+			pw.print(String.format("#{%s}", key));
+			first = false;
+		}
+		pw.println();
+		
+		return sw.toString();
 	}
 }

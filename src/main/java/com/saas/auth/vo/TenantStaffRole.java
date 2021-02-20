@@ -1,5 +1,6 @@
 package com.saas.auth.vo;
 
+import java.util.Date;
 import java.util.List;
 
 import com.zpsenior.graphql4j.annotation.Field;
@@ -24,6 +25,12 @@ public class TenantStaffRole {
 
 	@Field(desc="权限id,逗号分隔", len=1000)
 	private String[]  privileges;
+	
+	@Field(desc="修改时间")
+	private Date updateDate;
+	
+	@Field(desc="创建时间")
+	private Date createDate;
 
 	@Join(bind = "queryStaffRolePrivilegeList", params = { "tenantId", "roleId" })
 	private List<Privilege> privilegeList;

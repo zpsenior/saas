@@ -38,6 +38,9 @@ public class GoodsReview {
 	@Field(desc="评价图片", len=500)
 	private String[] imgs;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

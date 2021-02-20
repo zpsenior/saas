@@ -58,6 +58,9 @@ public class Goods {
 	@Field(desc="商品状态")
 	private GoodsStatus goodsStatus;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 	

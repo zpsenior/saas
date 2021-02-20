@@ -14,11 +14,11 @@ public class PaymentNotify {
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 	
-	@Field(isKey=true, desc="微信内部订单号")
-	private String transactionId;
-	
 	@Field(isKey=true, desc="微信外部订单号")
 	private String outTradeNo;
+	
+	@Field(desc="微信内部订单号")
+	private String transactionId;
 
 	@Field(desc="创建日期")
 	private Date createDate;

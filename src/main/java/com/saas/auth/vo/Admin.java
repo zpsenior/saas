@@ -34,12 +34,15 @@ public class Admin {
 
 	@Field(desc="人员状态")
 	private UserStatus status;
-
-	@Field(desc="创建日期")
-	private Date createDate;
 	
 	@Field(desc="用户角色ID", len=100)
 	private String[] adminRoles;
+
+	@Field(desc="修改日期")
+	private Date updateDate;
+
+	@Field(desc="创建日期")
+	private Date createDate;
 	
 	@Join(bind = "queryAdminRoleList", params = { "adminRoles" })
 	private List<AdminRole> roles;

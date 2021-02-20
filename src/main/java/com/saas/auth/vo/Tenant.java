@@ -30,10 +30,13 @@ public class Tenant {
 	private String legalPersonId;
 
 	@Field(desc="联系电话")
-	private String mobile;
+	private String mobileno;
 
 	@Field(desc="注册地址", len=100)
 	private String address;
+
+	@Field(desc="修改日期")
+	private Date updateDate;
 
 	@Field(desc="创建日期")
 	private Date createDate;

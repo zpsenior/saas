@@ -53,6 +53,9 @@ public class Order {
 	@Field(desc="支付日期")
 	private Date payDate;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

@@ -26,6 +26,12 @@ public class TeacherCircle {
 	@Field(desc="图片地址", len=300)
 	private String[] imgs;
 
+	@Field(desc="状态")
+	private boolean status;
+
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

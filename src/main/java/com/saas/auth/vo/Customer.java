@@ -35,6 +35,9 @@ public class Customer {
 	@Field(desc="电子油箱")
 	private String email;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

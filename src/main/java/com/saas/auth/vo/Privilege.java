@@ -1,5 +1,7 @@
 package com.saas.auth.vo;
 
+import java.util.Date;
+
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
 
@@ -20,4 +22,10 @@ public class Privilege {
 
 	@Field(desc="权限对应路径", len=1000)
 	private String[]  urls;
+
+	@Field(desc="修改日期")
+	private Date updateDate;
+
+	@Field(desc="创建日期")
+	private Date createDate;
 }

@@ -20,6 +20,9 @@ public class GoodsFavorite {
 	@Field(isKey=true, desc="商品ID")
 	private long goodsId;
 
+	@Field(desc="修改日期")
+	private Date updateDate;
+
 	@Field(desc="创建日期")
 	private Date createDate;
 

@@ -1,5 +1,20 @@
 package com.saas.training.request;
 
-public class QueryTeacherParam {
+import com.saas.pub.QueryParam;
+import com.zpsenior.graphql4j.annotation.Input;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
+@Input("QueryTeacherParam")
+public class QueryTeacherParam extends QueryParam {
+	
+	private String tenant;
+	
+	private String staffId;
 
 }
