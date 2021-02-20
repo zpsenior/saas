@@ -3,12 +3,14 @@ package com.saas.training.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.training.request.QueryTeacherReviewParam;
 import com.saas.training.vo.TeacherReview;
 
+@Mapper
 public interface DAOTeacherReview {
 	
 	@Select("select * from training_teacher_review where tenant_id=#{tenantId} and staff_id=#{staffId}")
@@ -26,6 +28,7 @@ public interface DAOTeacherReview {
 	public void addTeacherReview(TeacherReview params)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update training_teacher_review",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' customerId != null'>customer_id=#{customerId}</if>",
@@ -35,7 +38,8 @@ public interface DAOTeacherReview {
 		"</trim>",
 		"where tenant_id=#{tenantId}",
 		"  and staff_id=#{staffId}",
-		"  and review_id=#{reviewId}"
+		"  and review_id=#{reviewId}",
+		"</script>"
 		})
 	public void updateTeacherReview(TeacherReview params)throws Exception;
 

@@ -3,6 +3,7 @@ package com.saas.auth.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -10,6 +11,7 @@ import com.saas.auth.request.QueryPrivilegeParam;
 import com.saas.auth.vo.Privilege;
 import com.saas.auth.vo.UserInfo;
 
+@Mapper
 public interface DAOPrivilege {
 
 	@Select({"select * from auth_privilege where tenant_id=#{tenantId} and privilege_id in",
@@ -31,6 +33,7 @@ public interface DAOPrivilege {
 	public void addPrivilege(Privilege params)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update auth_privilege",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' descript != null'>descript=#{descript}</if>",
@@ -38,7 +41,8 @@ public interface DAOPrivilege {
 		"   <if test='true'>update_date=now()</if>",
 		"</trim>",
 		"where privilege_id=#{privilegeId}",
-		"  and scope=#{scope}"
+		"  and scope=#{scope}",
+		"</script>"
 		})
 	public void updatePrivilege(Privilege params)throws Exception;
 

@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.QueryOrderParam;
 import com.saas.goods.vo.GoodsFavorite;
 
+@Mapper
 public interface DAOGoodsFavorite {
 
 	@Select({"select * from goods_favorite where tenant_id=#{tenantId} and customer_id=#{customerId}"})
@@ -27,13 +29,15 @@ public interface DAOGoodsFavorite {
 	public void addGoodsFavorite(GoodsFavorite favorite)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update goods_favorite",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test='true'>update_date=now()</if>",
 		"</trim>",
 		"where tenant_id=#{tenantId}",
 		"  and customer_id=#{customerId}",
-		"  and goods_id=#{goodsId}"
+		"  and goods_id=#{goodsId}",
+		"</script>"
 		})
 	public void updateGoodsFavorite(GoodsFavorite favorite)throws Exception;
 	

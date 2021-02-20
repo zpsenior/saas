@@ -18,13 +18,13 @@ import com.saas.pub.SignUtils;
 @Component
 public class Certificate {
 
-	@Value("${publicKeyFile}")
+	@Value("${wpay.publicKeyFile}")
 	private String publicKeyFile;
 
-	@Value("${privateKeyFile}")
+	@Value("${wpay.privateKeyFile}")
 	private String privateKeyFile;
 
-	@Value("${secretKeyStr}")
+	@Value("${wpay.secretKeyStr}")
 	private String secretKeyStr;
 
 	private PrivateKey privateKey;
@@ -35,7 +35,7 @@ public class Certificate {
 
 	private boolean inited = false;
 
-	@PostConstruct
+	//@PostConstruct
 	public void init() throws Exception {
 		if (inited) {
 			return;

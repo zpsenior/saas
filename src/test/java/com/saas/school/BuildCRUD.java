@@ -15,7 +15,7 @@ import com.zpsenior.graphql4j.schema.Member;
 import com.zpsenior.graphql4j.schema.Schema;
 import com.zpsenior.graphql4j.schema.TypeConfig;
 
-public class BuildInertUpdate {
+public class BuildCRUD {
 
 	private static String getTableName(String name, String className) {
 		name = toUnderscore(name);
@@ -92,6 +92,7 @@ public class BuildInertUpdate {
 			pw.println(wrapper("Insert", buildInsert(name, fields)));
 			pw.println(wrapper("Update", buildUpdate(name, fields, keys)));
 			pw.println(wrapper("Select", buildSelect(name, keys)));
+			pw.println(wrapper("Delete", buildDelete(name, keys)));
 			pw.println();
 		}
 	}
@@ -100,6 +101,9 @@ public class BuildInertUpdate {
 		LineNumberReader reader = new LineNumberReader(new StringReader(str));
 		StringBuffer sb = new StringBuffer();
 		sb.append("@").append(prefix).append("({\n");
+		if("Update".equals(prefix)) {
+			sb.append("\"<script>\",").append("\n");
+		}
 		while(true) {
 			String line = reader.readLine();
 			if(line == null) {
@@ -110,7 +114,12 @@ public class BuildInertUpdate {
 			}
 			sb.append("\"").append(line).append("\",").append("\n");
 		}
-		sb.setLength(sb.length() - 2);
+		if("Update".equals(prefix)) {
+			sb.append("\"</script>\"");
+		}else {
+			sb.setLength(sb.length() - 2);
+			
+		}
 		sb.append("\n").append("})");
 		return sb.toString();
 	}
@@ -210,6 +219,28 @@ public class BuildInertUpdate {
 		PrintWriter pw = new PrintWriter(sw);
 
 		pw.print("select * from " + name);
+		boolean first = true;
+		for(String key : keys) {
+			if(first) {
+				pw.print(" where ");
+			}else {
+				pw.print(" and ");
+			}
+			pw.print(toUnderscore(key));
+			pw.print("=");
+			pw.print(String.format("#{%s}", key));
+			first = false;
+		}
+		pw.println();
+		
+		return sw.toString();
+	}
+
+	private static String buildDelete(String name, Set<String> keys) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+
+		pw.print("delete from " + name);
 		boolean first = true;
 		for(String key : keys) {
 			if(first) {

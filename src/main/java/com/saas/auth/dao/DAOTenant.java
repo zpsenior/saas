@@ -3,12 +3,14 @@ package com.saas.auth.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.auth.request.QueryTenantParam;
 import com.saas.auth.vo.Tenant;
 
+@Mapper
 public interface DAOTenant {
 
 	@Select({"select * from auth_tenant"})
@@ -26,6 +28,7 @@ public interface DAOTenant {
 	public void addTenant(Tenant tenant)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update auth_tenant",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' tenantName != null'>tenant_name=#{tenantName}</if>",
@@ -37,7 +40,8 @@ public interface DAOTenant {
 		"   <if test='true'>update_date=now()</if>",
 		"   <if test=' approvalDate != null'>approval_date=#{approvalDate}</if>",
 		"</trim>",
-		"where tenant_id=#{tenantId}"
+		"where tenant_id=#{tenantId}",
+		"</script>"
 		})
 	public void updateTenant(Tenant tenant)throws Exception;
 }

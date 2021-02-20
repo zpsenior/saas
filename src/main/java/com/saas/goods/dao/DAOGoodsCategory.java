@@ -3,12 +3,14 @@ package com.saas.goods.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.QueryGoodsParam;
 import com.saas.goods.vo.GoodsCategory;
 
+@Mapper
 public interface DAOGoodsCategory {
 
 	@Select({"select * from goods_category where tenant_id=#{tenantId} order by sort"})
@@ -26,6 +28,7 @@ public interface DAOGoodsCategory {
 	public void addGoodsCategory(GoodsCategory category)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update goods_category",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' name != null'>name=#{name}</if>",
@@ -34,7 +37,8 @@ public interface DAOGoodsCategory {
 		"   <if test='true'>update_date=now()</if>",
 		"</trim>",
 		"where tenant_id=#{tenantId}",
-		"  and category_id=#{categoryId}"
+		"  and category_id=#{categoryId}",
+		"</script>"
 		})
 
 	public void updateGoodsCategory(GoodsCategory category)throws Exception;

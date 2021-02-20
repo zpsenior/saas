@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.PostAddressParam;
 import com.saas.goods.vo.PostAddress;
 
+@Mapper
 public interface DAOPostAddress {
 
 	@Select({"select * from goods_post_address where tenant_id=#{tenantId} and customer_id=#{customerId}"})
@@ -27,6 +29,7 @@ public interface DAOPostAddress {
 	public void addPostAddress(PostAddress address)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update goods_post_address",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' recipient != null'>recipient=#{recipient}</if>",
@@ -40,7 +43,8 @@ public interface DAOPostAddress {
 		"</trim>",
 		"where tenant_id=#{tenantId}",
 		"  and customer_id=#{customerId}",
-		"  and address_id=#{addressId}"
+		"  and address_id=#{addressId}",
+		"</script>"
 		})
 	public void updatePostAddress(PostAddress address)throws Exception;
 	

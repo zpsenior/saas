@@ -3,12 +3,14 @@ package com.saas.auth.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.auth.request.QueryStaffParam;
 import com.saas.auth.vo.TenantStaff;
 
+@Mapper
 public interface DAOStaff {
 
 	@Select({"select * from auth_staff where tenant_id=#{tenantId}"})
@@ -26,6 +28,7 @@ public interface DAOStaff {
 	public void addStaff(TenantStaff staff)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update auth_tenant_staff",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' userId != null'>user_id=#{userId}</if>",
@@ -39,7 +42,8 @@ public interface DAOStaff {
 		"   <if test=' staffRoles != null'>staff_roles=#{staffRoles}</if>",
 		"</trim>",
 		"where tenant_id=#{tenantId}",
-		"  and staff_id=#{staffId}"
+		"  and staff_id=#{staffId}",
+		"</script>"
 		})
 	public void updateStaff(TenantStaff staff)throws Exception;
 }

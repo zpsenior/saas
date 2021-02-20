@@ -3,12 +3,14 @@ package com.saas.goods.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.QueryServiceParam;
 import com.saas.goods.vo.ServiceItem;
 
+@Mapper
 public interface DAOServiceItem {
 
 	@Select({"select * from goods_service_item where tenant_id=#{tenantId} and order_id=#{orderId}"})
@@ -26,6 +28,7 @@ public interface DAOServiceItem {
 	public void addServiceItem(ServiceItem item)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update goods_service_item",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' staffId != null'>staff_id=#{staffId}</if>",
@@ -38,7 +41,8 @@ public interface DAOServiceItem {
 		"</trim>",
 		"where tenant_id=#{tenantId}",
 		"  and service_id=#{serviceId}",
-		"  and service_item_id=#{serviceItemId}"
+		"  and service_item_id=#{serviceItemId}",
+		"</script>"
 		})
 	public void updateServiceItem(ServiceItem item)throws Exception;
 

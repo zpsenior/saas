@@ -1,10 +1,12 @@
 package com.saas.auth.dao;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.auth.vo.TenantStaffRole;
 
+@Mapper
 public interface DAOStaffRole {
 	
 	@Insert({
@@ -16,6 +18,7 @@ public interface DAOStaffRole {
 	public void addStaffRole(TenantStaffRole role)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update auth_tenant_staff_role",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' descript != null'>descript=#{descript}</if>",
@@ -23,7 +26,8 @@ public interface DAOStaffRole {
 		"   <if test='true'>update_date=now()</if>",
 		"</trim>",
 		"where tenant_id=#{tenantId}",
-		"  and role_id=#{roleId}"
+		"  and role_id=#{roleId}",
+		"</script>"
 		})
 	public void updateStaffRole(TenantStaffRole role)throws Exception;
 

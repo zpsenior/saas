@@ -25,10 +25,10 @@ public class WPay implements Const {
 	
 	private final static String baseUrl = "https://api.mch.weixin.qq.com";
 	
-	@Value("${mchid}")
+	@Value("${wpay.mchid}")
 	private String mchid;
 	
-	@Value("${serialNo}")
+	@Value("${wpay.serialNo}")
 	private String serialNo;
 
 	@Autowired

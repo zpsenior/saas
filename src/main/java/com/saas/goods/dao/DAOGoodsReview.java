@@ -3,12 +3,14 @@ package com.saas.goods.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.QueryGoodsReviewParam;
 import com.saas.goods.vo.GoodsReview;
 
+@Mapper
 public interface DAOGoodsReview {
 
 	@Select({"select * from goods_review where tenant_id=#{tenantId}"})
@@ -26,6 +28,7 @@ public interface DAOGoodsReview {
 	public void addGoodsReview(GoodsReview review)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update goods_review",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' customerId != null'>customer_id=#{customerId}</if>",
@@ -38,7 +41,8 @@ public interface DAOGoodsReview {
 		"</trim>",
 		"where tenant_id=#{tenantId}",
 		"  and goods_id=#{goodsId}",
-		"  and review_id=#{reviewId}"
+		"  and review_id=#{reviewId}",
+		"</script>"
 		})
 	public void updateGoodsReview(GoodsReview review)throws Exception;
 

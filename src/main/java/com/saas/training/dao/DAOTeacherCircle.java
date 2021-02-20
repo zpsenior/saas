@@ -3,12 +3,14 @@ package com.saas.training.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.training.request.QueryTeacherCircleParam;
 import com.saas.training.vo.TeacherCircle;
 
+@Mapper
 public interface DAOTeacherCircle {
 	
 	@Select("select * from training_teacher_circle where tenant_id=#{tenantId} and staff_id=#{staffId}")
@@ -26,6 +28,7 @@ public interface DAOTeacherCircle {
 	public void addTeacherCircle(TeacherCircle params)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update training_teacher_circle",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' content != null'>content=#{content}</if>",
@@ -35,7 +38,8 @@ public interface DAOTeacherCircle {
 		"</trim>",
 		"where tenant_id=#{tenantId}",
 		"  and staff_id=#{staffId}",
-		"  and circle_id=#{circleId}"
+		"  and circle_id=#{circleId}",
+		"</script>"
 		})
 	public void updateTeacherCircle(TeacherCircle params)throws Exception;
 

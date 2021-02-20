@@ -3,13 +3,14 @@ package com.saas.training.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.training.request.QueryTeacherParam;
 import com.saas.training.vo.Teacher;
 
-
+@Mapper
 public interface DAOTeacher {
 	
 	@Select("select * from training_teacher where tenant_id=#{tenantId}")
@@ -27,6 +28,7 @@ public interface DAOTeacher {
 	public void addTeacher(Teacher teacher)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update training_teacher",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' title != null'>title=#{title}</if>",
@@ -41,7 +43,8 @@ public interface DAOTeacher {
 		"   <if test='true'>update_date=now()</if>",
 		"</trim>",
 		"where tenant_id=#{tenantId}",
-		"  and staff_id=#{staffId}"
+		"  and staff_id=#{staffId}",
+		"</script>"
 		})
 	public void updateTeacher(Teacher teacher)throws Exception;
 

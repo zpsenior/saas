@@ -3,12 +3,14 @@ package com.saas.auth.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.auth.request.QueryCustomerParam;
 import com.saas.auth.vo.Customer;
 
+@Mapper
 public interface DAOCustomer {
 
 	@Select({"select * from auth_customer where tenant_id=#{tenantId}"})
@@ -26,6 +28,7 @@ public interface DAOCustomer {
 	public void addCustomer(Customer customer)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update auth_customer",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' userId != null'>user_id=#{userId}</if>",
@@ -38,7 +41,8 @@ public interface DAOCustomer {
 		"   <if test=' status != null'>status=#{status}</if>",
 		"</trim>",
 		"where tenant_id=#{tenantId}",
-		"  and customer_id=#{customerId}"
+		"  and customer_id=#{customerId}",
+		"</script>"
 		})
 	public void updateCustomer(Customer customer)throws Exception;
 

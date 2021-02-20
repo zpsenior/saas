@@ -3,12 +3,14 @@ package com.saas.goods.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.QueryGoodsParam;
 import com.saas.goods.vo.Goods;
 
+@Mapper
 public interface DAOGoods {
 
 	@Select({"<script>",
@@ -29,10 +31,12 @@ public interface DAOGoods {
 	public Goods getGoods(Goods goods)throws Exception;
 
 	@Insert({
+		"<script>",
 		"insert into goods(",
 		"     tenant_id,  goods_title,   description,   property,   img,   price,   discount,  parent_id,  category_id,   entity,  goods_status,  create_date",
 		")values(",
-		"   #{tenantId},#{goodsTitle},#{description},#{property},#{img},#{price},#{discount},#{parentId},#{categoryId},#{entity},#{goodsStatus},   now()   )"
+		"   #{tenantId},#{goodsTitle},#{description},#{property},#{img},#{price},#{discount},#{parentId},#{categoryId},#{entity},#{goodsStatus},   now()   )",
+		"</script>"
 		})
 	public void addGoods(Goods goods)throws Exception;
 	

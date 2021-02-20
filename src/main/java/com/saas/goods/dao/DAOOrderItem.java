@@ -3,12 +3,14 @@ package com.saas.goods.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.QueryOrderParam;
 import com.saas.goods.vo.OrderItem;
 
+@Mapper
 public interface DAOOrderItem {
 
 	@Select({"select * from goods_order_item where tenant_id=#{tenantId} and order_id=#{orderId}"})
@@ -26,6 +28,7 @@ public interface DAOOrderItem {
 	public void addOrderItem(OrderItem item)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update goods_order_item",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' goodsId != null'>goods_id=#{goodsId}</if>",
@@ -37,7 +40,8 @@ public interface DAOOrderItem {
 		"</trim>",
 		"where tenant_id=#{tenantId}",
 		"  and order_id=#{orderId}",
-		"  and order_item_id=#{orderItemId}"
+		"  and order_item_id=#{orderItemId}",
+		"</script>"
 		})
 	public void updateOrderItem(OrderItem item)throws Exception;
 

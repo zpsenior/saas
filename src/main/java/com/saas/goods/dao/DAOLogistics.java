@@ -3,12 +3,14 @@ package com.saas.goods.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.goods.request.QueryLogisticsParam;
 import com.saas.goods.vo.Logistics;
 
+@Mapper
 public interface DAOLogistics {
 	
 	@Select("select * from goods_logistics where tenant_id=#{tenantId} order by create_date desc")
@@ -26,6 +28,7 @@ public interface DAOLogistics {
 	public void addLogistics(Logistics params)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update goods_logistics",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' orderId != null'>order_id=#{orderId}</if>",
@@ -43,7 +46,8 @@ public interface DAOLogistics {
 		"   <if test='true'>update_date=now()</if>",
 		"</trim>",
 		"where tenant_id=#{tenantId}",
-		"  and logistics_id=#{logisticsId}"
+		"  and logistics_id=#{logisticsId}",
+		"</script>"
 		})
 	public void updateLogistics(Logistics params)throws Exception;
 

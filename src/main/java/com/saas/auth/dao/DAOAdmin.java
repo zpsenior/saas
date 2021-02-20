@@ -3,12 +3,14 @@ package com.saas.auth.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.saas.auth.request.QueryAdminParam;
 import com.saas.auth.vo.Admin;
 
+@Mapper
 public interface DAOAdmin {
 
 	@Select({"select * from auth_admin"})
@@ -26,6 +28,7 @@ public interface DAOAdmin {
 	public void addAdmin(Admin admin)throws Exception;
 	
 	@Update({
+		"<script>",
 		"update auth_admin",
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' userId != null'>user_id=#{userId}</if>",
@@ -37,7 +40,8 @@ public interface DAOAdmin {
 		"   <if test='true'>update_date=now()</if>",
 		"   <if test=' adminRoles != null'>admin_roles=#{adminRoles}</if>",
 		"</trim>",
-		"where admin_id=#{adminId}"
+		"where admin_id=#{adminId}",
+		"</script>"
 		})
 	public void updateAdmin(Admin admin)throws Exception;
 
