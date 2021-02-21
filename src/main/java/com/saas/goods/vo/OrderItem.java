@@ -37,7 +37,7 @@ public class OrderItem {
 	private Goods goods;
 
 	@Field(desc="物流单号", len=50)
-	private String logisticsId;
+	private long logisticsId;
 
 	@Join(bind = "getLogistics", params = { "tenantId", "orderId" })
 	private Logistics logistics;

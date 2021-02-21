@@ -23,7 +23,7 @@ public class UserInfo {
 	@Field(desc="联系电话")
 	private String mobileno;
 
-	@Field(desc="电子油箱")
+	@Field(desc="电子邮箱")
 	private String email;
 
 	@Field(desc="证件类型", len=2)

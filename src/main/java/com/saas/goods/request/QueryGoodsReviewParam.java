@@ -13,4 +13,7 @@ import lombok.ToString;
 @Input("QueryGoodsReviewParam")
 public class QueryGoodsReviewParam extends QueryParam {
 
+	public QueryGoodsReviewParam() {
+		super("review_id");
+	}
 }

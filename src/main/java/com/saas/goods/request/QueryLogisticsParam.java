@@ -16,4 +16,7 @@ public class QueryLogisticsParam extends QueryParam  {
 	
 	private String tenant;
 
+	public QueryLogisticsParam() {
+		super("logistics_id");
+	}
 }

@@ -21,9 +21,9 @@ public interface DAOTeacher {
 	
 	@Insert({
 		"insert into training_teacher(",
-		"     tenant_id,  staff_id,   title,   character,   descript,   portrait,   graduation,   certificate,   specialty,   prize,   status,  create_date",
+		"     tenant_id,  staff_id,   title,   character,   description,   portrait,   graduation,   certificate,   specialty,   prize,   status,  create_date",
 		")values(",
-		"   #{tenantId},#{staffId},#{title},#{character},#{descript},#{portrait},#{graduation},#{certificate},#{specialty},#{prize},#{status},   now()   )"
+		"   #{tenantId},#{staffId},#{title},#{character},#{description},#{portrait},#{graduation},#{certificate},#{specialty},#{prize},#{status},   now()   )"
 		})
 	public void addTeacher(Teacher teacher)throws Exception;
 	
@@ -33,7 +33,7 @@ public interface DAOTeacher {
 		"<trim prefix='set' suffixOverrides=','>",
 		"   <if test=' title != null'>title=#{title}</if>",
 		"   <if test=' character != null'>character=#{character}</if>",
-		"   <if test=' descript != null'>descript=#{descript}</if>",
+		"   <if test=' description != null'>description=#{description}</if>",
 		"   <if test=' portrait != null'>portrait=#{portrait}</if>",
 		"   <if test=' graduation != null'>graduation=#{graduation}</if>",
 		"   <if test=' certificate != null'>certificate=#{certificate}</if>",

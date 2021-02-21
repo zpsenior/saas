@@ -15,4 +15,7 @@ public class QueryTenantParam extends QueryParam {
 
 	private String tenantId;
 
+	public QueryTenantParam() {
+		super("tenant_id");
+	}
 }

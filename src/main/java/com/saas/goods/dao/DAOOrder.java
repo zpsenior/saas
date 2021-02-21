@@ -21,9 +21,9 @@ public interface DAOOrder {
 
 	@Insert({
 		"insert into goods_order(",
-		"     tenant_id,  customer_id,  total_amount,   status,   recipient,   gender,   mobile,   province,   city,   county,   detail,  pay_date,  create_date",
+		"     tenant_id,  customer_id,  total_amount,   status,   recipient,   gender,   mobileno,   province,   city,   county,   detail,  pay_date,  create_date",
 		")values(",
-		"   #{tenantId},#{customerId},#{totalAmount},#{status},#{recipient},#{gender},#{mobile},#{province},#{city},#{county},#{detail},#{payDate},   now()   )"
+		"   #{tenantId},#{customerId},#{totalAmount},#{status},#{recipient},#{gender},#{mobileno},#{province},#{city},#{county},#{detail},#{payDate},   now()   )"
 		})
 	public void addOrder(Order order)throws Exception;
 	
@@ -36,7 +36,7 @@ public interface DAOOrder {
 		"   <if test=' status != null'>status=#{status}</if>",
 		"   <if test=' recipient != null'>recipient=#{recipient}</if>",
 		"   <if test=' gender != null'>gender=#{gender}</if>",
-		"   <if test=' mobile != null'>mobile=#{mobile}</if>",
+		"   <if test=' mobileno != null'>mobileno=#{mobileno}</if>",
 		"   <if test=' province != null'>province=#{province}</if>",
 		"   <if test=' city != null'>city=#{city}</if>",
 		"   <if test=' county != null'>county=#{county}</if>",

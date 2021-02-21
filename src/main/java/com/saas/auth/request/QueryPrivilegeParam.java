@@ -13,4 +13,8 @@ import lombok.ToString;
 @Input("QueryPrivilegeParam")
 public class QueryPrivilegeParam extends QueryParam {
 
+	
+	public QueryPrivilegeParam() {
+		super("privilege_id");
+	}
 }

@@ -19,6 +19,9 @@ public class Teacher {
 	@Field(isKey=true, desc="员工ID")
 	private long staffId;
 
+	@Field(desc="姓名")
+	private String name;
+
 	@Field(desc="头衔", len=50)
 	private String title;
 
@@ -26,7 +29,7 @@ public class Teacher {
 	private String character;
 
 	@Field(desc="描述介绍", len=300)
-	private String descript;
+	private String description;
 
 	@Field(desc="头像", len=100)
 	private String portrait;

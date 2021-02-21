@@ -16,5 +16,9 @@ public class QueryTeacherReviewParam extends QueryParam {
 	private String tenant;
 	
 	private String staffId;
+	
+	public QueryTeacherReviewParam() {
+		super("review_id");
+	}
 
 }

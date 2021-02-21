@@ -16,5 +16,9 @@ public class QueryTeacherCircleParam extends QueryParam {
 	private String tenant;
 	
 	private String staffId;
+	
+	public QueryTeacherCircleParam() {
+		super("circle_id");
+	}
 
 }

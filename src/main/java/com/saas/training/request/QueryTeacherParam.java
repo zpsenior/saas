@@ -17,4 +17,8 @@ public class QueryTeacherParam extends QueryParam {
 	
 	private String staffId;
 
+	
+	public QueryTeacherParam() {
+		super("staff_id");
+	}
 }

@@ -21,9 +21,9 @@ public interface DAOTraining {
 	
 	@Insert({
 		"insert into training_training(",
-		"     tenant_id,   descript,   address,  create_date",
+		"     tenant_id,   description,   address,  create_date",
 		")values(",
-		"   #{tenantId},#{descript},#{address},   now()   )"
+		"   #{tenantId},#{description},#{address},   now()   )"
 		})
 	public void addTraining(Training training)throws Exception;
 	
@@ -31,7 +31,7 @@ public interface DAOTraining {
 		"<script>",
 		"update training_training",
 		"<trim prefix='set' suffixOverrides=','>",
-		"   <if test=' descript != null'>descript=#{descript}</if>",
+		"   <if test=' description != null'>description=#{description}</if>",
 		"   <if test=' address != null'>address=#{address}</if>",
 		"   <if test='true'>update_date=now()</if>",
 		"</trim>",

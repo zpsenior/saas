@@ -6,14 +6,15 @@ public abstract class QueryParam {
 	private int pageSize = 10;
 	private long min;
 	private long max;
-	private boolean desc = false;
+	private boolean descending = true;
 	private boolean forward = true;
+	
+	protected QueryParam(String sortfield) {
+		this.sortfield = sortfield;
+	}
 	
 	public String getSortfield() {
 		return sortfield;
-	}
-	public void setSortfield(String sortfield) {
-		this.sortfield = sortfield;
 	}
 	public int getPageSize() {
 		return pageSize;
@@ -33,11 +34,11 @@ public abstract class QueryParam {
 	public void setMax(long max) {
 		this.max = max;
 	}
-	public boolean isDesc() {
-		return desc;
+	public boolean isDescending() {
+		return descending;
 	}
-	public void setDesc(boolean desc) {
-		this.desc = desc;
+	public void setDescending(boolean descending) {
+		this.descending = descending;
 	}
 	public boolean isForward() {
 		return forward;

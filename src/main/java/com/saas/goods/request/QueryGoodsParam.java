@@ -19,4 +19,8 @@ public class QueryGoodsParam extends QueryParam {
 	
 	private boolean showParent = false;
 
+	public QueryGoodsParam() {
+		super("goods_id");
+	}
+
 }

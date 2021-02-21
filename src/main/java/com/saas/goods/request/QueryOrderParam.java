@@ -19,4 +19,8 @@ public class QueryOrderParam extends QueryParam {
 
 	private long orderId;
 
+	public QueryOrderParam() {
+		super("order_id");
+	}
+
 }

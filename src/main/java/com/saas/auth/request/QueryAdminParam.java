@@ -13,4 +13,7 @@ import lombok.ToString;
 @Input("QueryAdminParam")
 public class QueryAdminParam extends QueryParam {
 
+	public QueryAdminParam() {
+		super("admin_id");
+	}
 }

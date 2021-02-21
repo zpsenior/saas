@@ -15,5 +15,9 @@ public class QueryCustomerParam extends QueryParam {
 
 	private String tenantId;
 	
-	private String lognName;
+	private String lognName;	
+	
+	public QueryCustomerParam() {
+		super("customer_id");
+	}
 }

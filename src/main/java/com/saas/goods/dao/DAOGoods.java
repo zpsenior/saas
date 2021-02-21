@@ -17,7 +17,7 @@ public interface DAOGoods {
 		"select * from goods where tenant_id=#{tenantId}",
 		"and goodsStatus = '0'",
 		"<if test='showParent==true'>and parent_id is null</if>",
-		"<if test='goodsTitle!=null'>and goods_title like '%${goodsTitle}%'</if>",
+		"<if test='title!=null'>and title like '%${title}%'</if>",
 		"order by goodsId desc",
 		"</script>"})
 	public List<Goods> queryGoodsList(QueryGoodsParam param)throws Exception;
@@ -33,9 +33,9 @@ public interface DAOGoods {
 	@Insert({
 		"<script>",
 		"insert into goods(",
-		"     tenant_id,  goods_title,   description,   property,   img,   price,   discount,  parent_id,  category_id,   entity,  goods_status,  create_date",
+		"     tenant_id,  title,   description,   property,   img,   price,   discount,  parent_id,  category_id,   entity,  goods_status,  create_date",
 		")values(",
-		"   #{tenantId},#{goodsTitle},#{description},#{property},#{img},#{price},#{discount},#{parentId},#{categoryId},#{entity},#{goodsStatus},   now()   )",
+		"   #{tenantId},#{title},#{description},#{property},#{img},#{price},#{discount},#{parentId},#{categoryId},#{entity},#{goodsStatus},   now()   )",
 		"</script>"
 		})
 	public void addGoods(Goods goods)throws Exception;
@@ -43,7 +43,7 @@ public interface DAOGoods {
 	@Update({
 		"update goods",
 		"<trim prefix='set' suffixOverrides=','>",
-		"   <if test=' goodsTitle != null'>goods_title=#{goodsTitle}</if>",
+		"   <if test=' title != null'>title=#{title}</if>",
 		"   <if test=' description != null'>description=#{description}</if>",
 		"   <if test=' property != null'>property=#{property}</if>",
 		"   <if test=' img != null'>img=#{img}</if>",

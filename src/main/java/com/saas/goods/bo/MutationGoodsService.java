@@ -21,5 +21,11 @@ public class MutationGoodsService {
 		service.addService(params);
 		return true;
 	}
+	
+	@Field("appointment")
+	public boolean appointment(@Var("params") ServiceParam params) throws Exception{
+		service.updateService(params);
+		return true;
+	}
 
 }

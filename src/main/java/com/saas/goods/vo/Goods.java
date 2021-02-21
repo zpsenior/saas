@@ -20,7 +20,7 @@ public class Goods {
 	private long goodsId;
 
 	@Field(desc="商品名称", len=100)
-	private String goodsTitle;
+	private String title;
 
 	@Field(desc="商品描述", len=500)
 	private String description;
@@ -29,7 +29,7 @@ public class Goods {
 	private String property;
 
 	@Field(desc="商品图片", len=300)
-	private String[] img;
+	private String[] imgs;
 	
 	@Field(desc="商品价格")
 	private long price;

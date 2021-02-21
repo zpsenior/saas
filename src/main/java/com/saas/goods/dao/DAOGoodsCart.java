@@ -40,5 +40,8 @@ public interface DAOGoodsCart {
 		"</script>"
 		})
 	public void updateGoodsCart(GoodsCart cart)throws Exception;
+	
+	@Select({"delete from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId} and goods_id=#{goodsId}"})
+	public void removeGoodsCart(GoodsCart cart)throws Exception;
 
 }

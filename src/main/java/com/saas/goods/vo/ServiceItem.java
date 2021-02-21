@@ -26,6 +26,9 @@ public class ServiceItem {
 	@Field(desc="用户ID")
 	private long customerId;
 
+	@Field(desc="预约日期")
+	private Date appointDate;
+
 	@Field(desc="开始时间")
 	private Date beginTime;
 

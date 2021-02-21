@@ -1,6 +1,10 @@
 package com.saas.goods.bo;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +14,7 @@ import com.saas.goods.dao.DAOServiceItem;
 import com.saas.goods.request.QueryServiceParam;
 import com.saas.goods.vo.Service;
 import com.saas.goods.vo.ServiceItem;
+import com.saas.goods.vo.ServiceSchedule;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
 import com.zpsenior.graphql4j.annotation.Var;
@@ -51,4 +56,21 @@ public class QueryGoodsService {
 		return serviceItem.getServiceItem(params);
 	}
 
+	@Field("serviceSchedules")
+	public List<ServiceSchedule> queryServiceScheduleList(@Var("tenantId") String tenantId, @Var("customerId") Long customerId)throws Exception{
+		QueryServiceParam params = new QueryServiceParam();
+		List<ServiceItem> items = serviceItem.queryServiceItemList(params);
+		Map<Date, ServiceSchedule> maps = new TreeMap<>();
+		for(ServiceItem item : items) {
+			Date dt = item.getAppointDate();
+			ServiceSchedule schedule = maps.get(dt);
+			if(schedule == null) {
+				schedule = new ServiceSchedule();
+				schedule.setAppointDate(dt);
+				maps.put(dt, schedule);
+			}
+			schedule.addItem(item);
+		}
+		return new ArrayList<ServiceSchedule>(maps.values());
+	}
 }

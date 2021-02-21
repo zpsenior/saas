@@ -14,5 +14,8 @@ import lombok.ToString;
 public class QueryStaffParam extends QueryParam {
 
 	private String tenantId;
-
+	
+	public QueryStaffParam() {
+		super("staff_id");
+	}
 }

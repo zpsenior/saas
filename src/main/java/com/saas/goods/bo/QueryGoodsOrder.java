@@ -61,7 +61,7 @@ public class QueryGoodsOrder {
 		return goodsOrderItem.getOrderItem(params);
 	}
 
-	@Field("goodsCarts")
+	@Field("carts")
 	public List<GoodsCart> queryGoodsCartList(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
 		QueryOrderParam params = new QueryOrderParam();
 		params.setTenantId(tenantId);
@@ -69,7 +69,7 @@ public class QueryGoodsOrder {
 		return goodsCart.queryGoodsCartList(params);
 	}
 
-	@Field("goodsCart")
+	@Field("cart")
 	public GoodsCart getGoodsCart(@Var("tenantId") String tenantId, @Var("customerId") long customerId, @Var("goodsId") long goodsId)throws Exception{
 		GoodsCart params = new GoodsCart();
 		params.setTenantId(tenantId);
@@ -78,7 +78,7 @@ public class QueryGoodsOrder {
 		return goodsCart.getGoodsCart(params);
 	}
 
-	@Field("goodsFavorites")
+	@Field("favorites")
 	public List<GoodsFavorite> queryGoodsFavoriteList(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
 		QueryOrderParam params = new QueryOrderParam();
 		params.setTenantId(tenantId);
@@ -86,7 +86,7 @@ public class QueryGoodsOrder {
 		return goodsFavorite.queryGoodsFavoriteList(params);
 	}
 
-	@Field("goodsFavorite")
+	@Field("favorite")
 	public GoodsFavorite getGoodsFavorite(@Var("tenantId") String tenantId, @Var("customerId") long customerId, @Var("goodsId") long goodsId)throws Exception{
 		GoodsFavorite params = new GoodsFavorite();
 		params.setTenantId(tenantId);

@@ -13,6 +13,10 @@ import lombok.ToString;
 @Input("QueryTrainingParam")
 public class QueryTrainingParam extends QueryParam  {
 	
-	private String tenant;
+	private String tenantId;
+	
+	public QueryTrainingParam() {
+		super("tenant_id");
+	}
 
 }

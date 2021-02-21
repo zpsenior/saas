@@ -10,8 +10,12 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-@Input("QueryCallbackParam")
+@Input("QueryPaymentNotifyParam")
 public class QueryPaymentNotifyParam extends QueryParam {
 
 	private String tenantId;
+	
+	public QueryPaymentNotifyParam() {
+		super("out_trade_no");
+	}
 }
