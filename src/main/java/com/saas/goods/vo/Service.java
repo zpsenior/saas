@@ -4,6 +4,7 @@ package com.saas.goods.vo;
 import java.util.Date;
 
 import com.zpsenior.graphql4j.annotation.Field;
+import com.zpsenior.graphql4j.annotation.Join;
 import com.zpsenior.graphql4j.annotation.Type;
 
 import lombok.Data;
@@ -44,5 +45,8 @@ public class Service {
 
 	@Field(desc="创建日期")
 	private Date createDate;
+	
+	@Join(bind = "getGoods", params = { "goodsId" })
+	private Goods goods;
 
 }

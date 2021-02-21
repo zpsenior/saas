@@ -40,7 +40,7 @@ public class MD5 {
         return new String(str);
     }
     
-	public static String formatQueryString(TreeMap<String, String> map, String hashCode)throws Exception {
+	public static String formatQueryString(TreeMap<String, String> map)throws Exception {
 		StringBuffer sb = new StringBuffer();
 		for(String key : map.keySet()){
 			String value = map.get(key);
@@ -48,8 +48,6 @@ public class MD5 {
 			sb.append(value);
 			sb.append("&");
 		}
-		hashCode = MD5.encode(hashCode).toLowerCase();
-		sb.append(hashCode);
 		String token = sb.toString();
 		token = new String(token.getBytes(), "UTF-8");
 		return token;

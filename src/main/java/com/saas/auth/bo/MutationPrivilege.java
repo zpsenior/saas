@@ -19,13 +19,15 @@ public class MutationPrivilege {
 	private DAOPrivilege privilege;
 
 	@Field("add")
-	public void addPrivilege(@Var("params") Privilege params)throws Exception{
+	public boolean addPrivilege(@Var("params") Privilege params)throws Exception{
 		privilege.addPrivilege(params);
+		return true;
 	}
 
 	@Field("update")
-	public void updatePrivilege(@Var("params") Privilege params)throws Exception{
+	public boolean updatePrivilege(@Var("params") Privilege params)throws Exception{
 		privilege.updatePrivilege(params);
+		return true;
 	}
 
 }

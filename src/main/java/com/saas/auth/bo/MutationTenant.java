@@ -18,21 +18,24 @@ public class MutationTenant {
 	private DAOTenant tenant;
 	
 	@Field("apply")
-	public void applyTenant(@Var("params") Tenant params)throws Exception{
+	public boolean applyTenant(@Var("params") Tenant params)throws Exception{
 		tenant.addTenant(params);
+		return true;
 	}
 	
 	@Field("update")
-	public void updateTenantInfo(@Var("params") Tenant params)throws Exception{
+	public boolean updateTenantInfo(@Var("params") Tenant params)throws Exception{
 		tenant.updateTenant(params);
+		return true;
 	}
 	
 	@Field("approve")
-	public void approveTenant(@Var("tenantId") String tenantId)throws Exception{
+	public boolean approveTenant(@Var("tenantId") String tenantId)throws Exception{
 		Tenant params = new Tenant();
 		params.setTenantId(tenantId);
 		//?
 		tenant.updateTenant(params);
+		return true;
 	}
 
 }

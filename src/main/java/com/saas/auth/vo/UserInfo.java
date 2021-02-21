@@ -14,7 +14,7 @@ public class UserInfo {
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 
-	@Field(desc="用户ID")
+	@Field(isKey=true, desc="用户ID")
 	private long userId;
 	
 	@Field(desc="性别")

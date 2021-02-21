@@ -37,12 +37,14 @@ public class MutationStaff {
 	}
 	
 	@Field("update")
-	public void updateStaff(@Var("params") TenantStaff params)throws Exception{
+	public boolean updateStaff(@Var("params") TenantStaff params)throws Exception{
 		staff.updateStaff(params);
+		return true;
 	}
 
 	@Field("add")
-	public void addStaff(@Var("params") TenantStaff params)throws Exception{
+	public boolean addStaff(@Var("params") TenantStaff params)throws Exception{
 		staff.addStaff(params);
+		return true;
 	}
 }

@@ -140,7 +140,7 @@ query myCarts($tenantId:String, $customerId:Long,
 
 query myCart($tenantId:String, $customerId:Long, $goodsId:Long){
 	goodsOrder{
-		cart(params:{tenantId:$tenantId, customerId:$customerId, goodsId:$goodsId}){
+		cart(tenantId:$tenantId, customerId:$customerId, goodsId:$goodsId){
 					goods{
 						title,
 						description,
@@ -176,7 +176,7 @@ query myFavorites($tenantId:String, $customerId:Long,
 
 query myFavorite($tenantId:String, $customerId:Long, $goodsId:Long){
 	goodsOrder{
-		favorite(tenantId:$tenantId, goodsId:$goodsId){
+		favorite(tenantId:$tenantId, customerId:$customerId, goodsId:$goodsId){
 					goods{
 						title,
 						description,
@@ -212,9 +212,9 @@ query myServices($tenantId:String, $customerId:Long,
 	}
 }
 
-query myService($tenantId:String, $customerId:Long, $serviceId:Long){
+query myService($tenantId:String, $serviceId:Long){
 	goodsService{
-		service(tenantId:$tenantId, customerId:$customerId, serviceId:$serviceId){
+		service(tenantId:$tenantId, serviceId:$serviceId){
 					goods{
 						title,
 						description,
@@ -249,3 +249,8 @@ query mySchedules($tenantId:String, $customerId:Long){
 		}
 	}
 }
+
+#mutation login($loginName:String, $password:String){
+#	customer{
+#	}
+#}

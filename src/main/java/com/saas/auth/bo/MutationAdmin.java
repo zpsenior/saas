@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.saas.auth.dao.DAOAdmin;
 import com.saas.auth.request.AdminParam;
 import com.saas.auth.request.LoginParam;
-import com.saas.pub.VerifyCode;
+import com.saas.pub.VerificationCodeService;
 import com.zpsenior.graphql4j.annotation.Type;
 import com.zpsenior.graphql4j.annotation.Var;
 
@@ -20,7 +20,7 @@ public class MutationAdmin {
 	private DAOAdmin admin;
 	
 	@Autowired
-	private VerifyCode verifyCode;
+	private VerificationCodeService verificationCode;
 
 	public boolean login(@Var("login") LoginParam login)throws Exception{
 		return true;
@@ -35,12 +35,13 @@ public class MutationAdmin {
 	}
 
 	public boolean sendVerifyCode(@Var("mobileno") String mobileno)throws Exception{
-		String code = verifyCode.createCode(mobileno);
+		verificationCode.sendCheckCode(mobileno, "01", 60);
 		return true;
 	}
 
-	public void updateAdmin(@Var("params") AdminParam params)throws Exception{
+	public boolean updateAdmin(@Var("params") AdminParam params)throws Exception{
 		admin.updateAdmin(params);
+		return true;
 	}
 
 }

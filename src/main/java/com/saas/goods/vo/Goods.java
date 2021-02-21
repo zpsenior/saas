@@ -50,13 +50,13 @@ public class Goods {
 	private GoodsCategory category;
 
 	@Join(bind = "getGoodsRanking", params = { "tenantId", "goodsId" })
-	private GoodsRanking ranking;
+	private GoodsDaily ranking;
 
 	@Field(desc="是否实体商品")
 	private GoodsEntity entity;
 
 	@Field(desc="商品状态")
-	private GoodsStatus goodsStatus;
+	private GoodsStatus status;
 
 	@Field(desc="修改日期")
 	private Date updateDate;

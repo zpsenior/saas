@@ -1,38 +1,92 @@
 package com.saas.training;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.saas.wpay.WPayNotify;
+
 @Configuration
 public class AppConfig implements WebMvcConfigurer{
 	
-	@Value("${graphql.queryClass}")
-	private String queryClass;
+	@Value("${graphql.inputClassPackages}")
+	private String inputClassPackages;
 	
-	@Value("${graphql.mutationClass}")
-	private String mutationClass;
+	@Value("${wpay.notify.urlPattern}")
+	private String wpayNotifyPattern;
 	
-	@Value("${graphql.inputClassPackage}")
-	private String inputClassPackage;
 	
-	@Value("${graphql.qlFile}")
-	private String qlFile;
 	
-	@Value("${graphql.urlPattern}")
-	private String urlPattern;
+	@Value("${graphql.customer.queryClass}")
+	private String customerQueryClass;
+	
+	@Value("${graphql.customer.mutationClass}")
+	private String customerMutationClass;
+	
+	@Value("${graphql.customer.qlFile}")
+	private String customerQLFile;
+	
+	@Value("${graphql.customer.urlPattern}")
+	private String customerUrlPattern;
+	
+
+	@Value("${graphql.staff.queryClass}")
+	private String staffQueryClass;
+	
+	@Value("${graphql.staff.mutationClass}")
+	private String staffMutationClass;
+	
+	@Value("${graphql.staff.qlFile}")
+	private String staffQLFile;
+	
+	@Value("${graphql.staff.urlPattern}")
+	private String staffUrlPattern;
+	
+
+	@Value("${graphql.admin.queryClass}")
+	private String adminQueryClass;
+	
+	@Value("${graphql.admin.mutationClass}")
+	private String adminMutationClass;
+	
+	@Value("${graphql.admin.qlFile}")
+	private String adminQLFile;
+	
+	@Value("${graphql.admin.urlPattern}")
+	private String adminUrlPattern;
+	
+	@Autowired
+	WPayNotify notify;
 	
 	public void addInterceptors(InterceptorRegistry registry) {
-		if(queryClass != null && mutationClass != null && qlFile != null) {
-			SecurityInterceptor interceptor = new SecurityInterceptor();
-			try{
-				interceptor.init(queryClass, mutationClass, inputClassPackage, qlFile);
-			}catch(Exception e) {
-				e.printStackTrace();
-				return;
-			}
-			registry.addInterceptor(interceptor).addPathPatterns(urlPattern);
+		SecurityInterceptor interceptor = new SecurityInterceptor();
+		try{
+			interceptor.init(customerQueryClass, customerMutationClass, inputClassPackages, customerQLFile);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		registry.addInterceptor(interceptor).addPathPatterns(customerUrlPattern);
+		interceptor = new SecurityInterceptor();
+		try{
+			interceptor.init(staffQueryClass, staffMutationClass, inputClassPackages, staffQLFile);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		registry.addInterceptor(interceptor).addPathPatterns(staffUrlPattern);
+		interceptor = new SecurityInterceptor();
+		try{
+			interceptor.init(adminQueryClass, adminMutationClass, inputClassPackages, adminQLFile);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		registry.addInterceptor(interceptor).addPathPatterns(adminUrlPattern);
+		if(wpayNotifyPattern != null) {
+			registry.addInterceptor(notify).addPathPatterns(wpayNotifyPattern);
 		}
 	}
 }

@@ -20,17 +20,20 @@ public class MutationTraining {
 	private DAOTraining training;
 
 	
-	public void addTeacher(Teacher params) throws Exception{
+	public boolean addTeacher(Teacher params) throws Exception{
 		teacher.addTeacher(params);
+		return true;
 	}
 
 	
-	public void updateTeacher(Teacher params) throws Exception{
+	public boolean updateTeacher(Teacher params) throws Exception{
 		teacher.updateTeacher(params);
+		return true;
 	}
 	
-	public void updateTraining(Training params) throws Exception{
+	public boolean updateTraining(Training params) throws Exception{
 		training.updateTraining(params);
+		return true;
 	}
 
 }

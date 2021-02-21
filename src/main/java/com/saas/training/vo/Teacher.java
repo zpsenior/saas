@@ -45,6 +45,9 @@ public class Teacher {
 	
 	@Field(desc="获奖情况", len=100)
 	private String prize;
+	
+	@Field(desc="联系电话")
+	private String mobileno;
 
 	@Field(desc="状态")
 	private boolean status;

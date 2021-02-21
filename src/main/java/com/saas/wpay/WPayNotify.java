@@ -5,13 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saas.pub.SignUtils;
 
 @Component
-public class WPayNotify {
+public class WPayNotify extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	private Certificate cert;
@@ -19,7 +20,8 @@ public class WPayNotify {
 	@Autowired(required=false)
 	private NotifyCallback callback;
 	
-	public void acceptNotify(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		String body = doVerify(request);
 		
 		ObjectMapper mapper = new ObjectMapper();
@@ -37,6 +39,7 @@ public class WPayNotify {
 		if(callback != null) {
 			callback.process(content);
 		}
+		return false;
 	}
 
 	private String doVerify(HttpServletRequest request) throws Exception {

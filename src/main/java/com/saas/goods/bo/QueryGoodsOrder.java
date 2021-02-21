@@ -62,10 +62,7 @@ public class QueryGoodsOrder {
 	}
 
 	@Field("carts")
-	public List<GoodsCart> queryGoodsCartList(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
-		QueryOrderParam params = new QueryOrderParam();
-		params.setTenantId(tenantId);
-		params.setCustomerId(customerId);
+	public List<GoodsCart> queryGoodsCartList(@Var("params") QueryOrderParam params)throws Exception{
 		return goodsCart.queryGoodsCartList(params);
 	}
 
@@ -79,10 +76,7 @@ public class QueryGoodsOrder {
 	}
 
 	@Field("favorites")
-	public List<GoodsFavorite> queryGoodsFavoriteList(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
-		QueryOrderParam params = new QueryOrderParam();
-		params.setTenantId(tenantId);
-		params.setCustomerId(customerId);
+	public List<GoodsFavorite> queryGoodsFavoriteList(@Var("params") QueryOrderParam params)throws Exception{
 		return goodsFavorite.queryGoodsFavoriteList(params);
 	}
 
