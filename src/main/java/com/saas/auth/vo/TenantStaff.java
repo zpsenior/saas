@@ -49,6 +49,6 @@ public class TenantStaff {
 	@Field(desc="用户角色ID", len=1000)
 	private String[] staffRoles;
 	
-	@Join(bind = "queryStaffRoleList", params = { "tenantId", "staffRoles" })
+	@Join(request = "queryStaffRoleList", params = { "tenantId", "staffRoles" })
 	private List<TenantStaffRole> roles;
 }

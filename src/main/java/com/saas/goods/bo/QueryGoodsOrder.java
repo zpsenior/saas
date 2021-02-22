@@ -46,11 +46,19 @@ public class QueryGoodsOrder {
 		params.setOrderId(orderId);
 		return goodsOrder.getOrder(params);
 	}
-
+	
 	@Field("orderItems")
 	public List<OrderItem> queryOrderItemList(@Var("params") QueryOrderParam params)throws Exception{
 		return goodsOrderItem.queryOrderItemList(params);
 	}
+
+	/*@Field("orderItems")
+	public List<OrderItem> queryOrderItemList(@Var("tenantId") String tenantId, @Var("orderId") long orderId)throws Exception{
+		QueryOrderParam params = new QueryOrderParam();
+		params.setTenantId(tenantId);
+		params.setOrderId(orderId);
+		return goodsOrderItem.queryOrderItemList(params);
+	}*/
 
 	@Field("orderItem")
 	public OrderItem getOrderItem(@Var("tenantId") String tenantId, @Var("orderId") long orderId, @Var("itemId") long orderItemId)throws Exception{

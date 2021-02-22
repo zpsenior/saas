@@ -13,9 +13,9 @@ import lombok.ToString;
 @Input("QueryTeacherCircleParam")
 public class QueryTeacherCircleParam extends QueryParam {
 	
-	private String tenant;
+	private String tenantId;
 	
-	private String staffId;
+	private long staffId;
 	
 	public QueryTeacherCircleParam() {
 		super("circle_id");

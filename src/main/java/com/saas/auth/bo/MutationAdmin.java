@@ -2,12 +2,13 @@ package com.saas.auth.bo;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.saas.auth.dao.DAOAdmin;
 import com.saas.auth.request.AdminParam;
 import com.saas.auth.request.LoginParam;
-import com.saas.pub.VerificationCodeService;
+import com.saas.pub.service.VerificationCodeService;
 import com.zpsenior.graphql4j.annotation.Type;
 import com.zpsenior.graphql4j.annotation.Var;
 
@@ -16,26 +17,30 @@ import com.zpsenior.graphql4j.annotation.Var;
 public class MutationAdmin {
 	
 
+	@Value("${saas.register.templateCode}")
+	private String registerTemplateCode;
+	
+
 	@Autowired
 	private DAOAdmin admin;
 	
 	@Autowired
 	private VerificationCodeService verificationCode;
 
-	public boolean login(@Var("login") LoginParam login)throws Exception{
+	public boolean login(@Var("params") LoginParam login)throws Exception{
 		return true;
 	}
 
-	public boolean changePassword(@Var("login") LoginParam login)throws Exception{
+	public boolean changePassword(@Var("params") LoginParam login)throws Exception{
 		return true;
 	}
 
-	public boolean retrievePassword(@Var("login") LoginParam login)throws Exception{
+	public boolean retrievePassword(@Var("params") LoginParam login)throws Exception{
 		return true;
 	}
 
 	public boolean sendVerifyCode(@Var("mobileno") String mobileno)throws Exception{
-		verificationCode.sendCheckCode(mobileno, "01", 60);
+		verificationCode.sendCheckCode(mobileno, registerTemplateCode, 60);
 		return true;
 	}
 

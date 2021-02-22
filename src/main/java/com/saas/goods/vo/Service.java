@@ -26,7 +26,7 @@ public class Service {
 	private long staffId;
 
 	@Field(desc="商品ID")
-	private String goodsId;
+	private long goodsId;
 
 	@Field(desc="订单ID")
 	private long orderId;
@@ -46,7 +46,7 @@ public class Service {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "getGoods", params = { "goodsId" })
+	@Join(request = "QueryGoods.getGoods", params = { "tenantId", "goodsId" })
 	private Goods goods;
 
 }

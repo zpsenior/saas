@@ -6,10 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.saas.training.dao.DAOTeacher;
+import com.saas.training.dao.DAOTeacherCircle;
+import com.saas.training.dao.DAOTeacherReview;
 import com.saas.training.dao.DAOTraining;
+import com.saas.training.request.QueryTeacherCircleParam;
 import com.saas.training.request.QueryTeacherParam;
+import com.saas.training.request.QueryTeacherReviewParam;
 import com.saas.training.request.QueryTrainingParam;
 import com.saas.training.vo.Teacher;
+import com.saas.training.vo.TeacherCircle;
+import com.saas.training.vo.TeacherReview;
 import com.saas.training.vo.Training;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
@@ -21,6 +27,12 @@ public class QueryTraining {
 	
 	@Autowired
 	private DAOTeacher teacher;
+	
+	@Autowired
+	private DAOTeacherReview teacherReview;
+	
+	@Autowired
+	private DAOTeacherCircle teacherCircle;
 	
 	@Autowired
 	private DAOTraining training;
@@ -48,5 +60,21 @@ public class QueryTraining {
 		params.setTenantId(tenantId);
 		params.setStaffId(staffId);
 		return teacher.getTeacher(params);
+	}
+
+	@Field("teacherReviews")
+	public List<TeacherReview> queryTeacherReviewList(@Var("tenantId") String tenantId, @Var("staffId") long staffId)throws Exception{
+		QueryTeacherReviewParam params = new QueryTeacherReviewParam();
+		params.setTenantId(tenantId);
+		params.setStaffId(staffId);
+		return teacherReview.queryTeacherReviewList(params);
+	}
+
+	@Field("teacherCircles")
+	public List<TeacherCircle> queryTeacherCircleList(@Var("tenantId") String tenantId, @Var("staffId") long staffId)throws Exception{
+		QueryTeacherCircleParam params = new QueryTeacherCircleParam();
+		params.setTenantId(tenantId);
+		params.setStaffId(staffId);
+		return teacherCircle.queryTeacherCircleList(params);
 	}
 }

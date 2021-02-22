@@ -44,9 +44,9 @@ public class Tenant {
 	@Field(desc="批准日期")
 	private Date approvalDate;
 
-	@Join(bind = "queryStaffList", params = { "tenantId" }, map = { "managers" })
+	@Join(request = "QueryStaff.queryStaffList", params = { "tenantId" }, map = { "managers" })
 	private List<TenantStaff> staffs;
 
-	@Join(bind = "queryUserList", params = { "tenantId" })
+	@Join(request = "QueryCustomer.queryCustomerList", params = { "tenantId" })
 	private List<Customer> customer;
 }

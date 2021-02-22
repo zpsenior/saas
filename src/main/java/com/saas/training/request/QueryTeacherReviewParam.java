@@ -13,9 +13,9 @@ import lombok.ToString;
 @Input("QueryTeacherReviewParam")
 public class QueryTeacherReviewParam extends QueryParam {
 	
-	private String tenant;
+	private String tenantId;
 	
-	private String staffId;
+	private long staffId;
 	
 	public QueryTeacherReviewParam() {
 		super("review_id");

@@ -26,7 +26,7 @@ public class QueryCustomer {
 	}
 
 	@Field("customer")
-	public Customer getCustomer(@Var("tenantId") String tenantId, @Var("customerId") Long customerId)throws Exception{
+	public Customer getCustomer(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
 		Customer params = new Customer();
 		params.setTenantId(tenantId);
 		params.setCustomerId(customerId);

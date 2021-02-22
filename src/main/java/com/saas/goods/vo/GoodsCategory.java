@@ -35,7 +35,7 @@ public class GoodsCategory {
 	private Date createDate;
 
 
-	@Join(bind = "queryGoodsList", params = { "tenantId", "categoryId" })
+	@Join(request = "QueryGoods.queryGoodsList", params = { "tenantId", "categoryId" })
 	private List<Goods> goodsList;
 
 }

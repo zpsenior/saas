@@ -38,7 +38,7 @@ public class Training {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "queryTeacherList", params = { "tenantId" })
+	@Join(request = "queryTeacherList", params = { "tenantId" })
 	private List<Teacher> teachers;
 
 }

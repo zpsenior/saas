@@ -43,14 +43,11 @@ public class Goods {
 	@Field(desc="商品类别")
 	private long categoryId;
 	
-	@Join(bind = "queryChildGoodsList", params = { "tenantId", "goodsId" })
+	@Join(request = "QueryGoods.queryChildGoodsList", params = { "tenantId", "goodsId" })
 	private List<Goods> children;
 	
-	@Join(bind = "getGoodsCategory", params = { "tenantId", "categoryId" })
+	@Join(request = "QueryGoods.getGoodsCategory", params = { "tenantId", "categoryId" })
 	private GoodsCategory category;
-
-	@Join(bind = "getGoodsRanking", params = { "tenantId", "goodsId" })
-	private GoodsDaily ranking;
 
 	@Field(desc="是否实体商品")
 	private GoodsEntity entity;
@@ -64,7 +61,7 @@ public class Goods {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "queryGoodsReviewList", params = { "tenantId", "goodsId" })
+	@Join(request = "QueryGoods.queryGoodsReviewList", params = { "tenantId", "goodsId" })
 	private List<GoodsReview> reviews;
 	
 }

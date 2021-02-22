@@ -37,7 +37,7 @@ public class TeacherReview {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "getCustomer", params = { "tenantId", "customerId" })
+	@Join(request = "QueryCustomer.getCustomer", params = { "tenantId", "customerId" })
 	private Customer commentator;
 
 }

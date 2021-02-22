@@ -44,6 +44,6 @@ public class Admin {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "queryAdminRoleList", params = { "adminRoles" })
+	@Join(request = "QueryAdmin.queryAdminRoleList", params = { "adminRoles" })
 	private List<AdminRole> roles;
 }

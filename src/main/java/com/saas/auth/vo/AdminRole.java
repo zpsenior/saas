@@ -29,7 +29,7 @@ public class AdminRole {
 	@Field(desc="创建时间")
 	private Date createDate;
 	
-	@Join(bind = "queryAdminRolePrivilegeList", params = { "roleId" })
+	@Join(request = "queryAdminRolePrivilegeList", params = { "privileges" })
 	private List<Privilege> privilegeList;
 
 }

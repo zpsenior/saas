@@ -33,13 +33,13 @@ public class OrderItem {
 	@Field(desc="商品金额")
 	private long amount;
 	
-	@Join(bind = "getGoods", params = { "goodsId" })
+	@Join(request = "QueryGoods.getGoods", params = { "tenantId", "goodsId" })
 	private Goods goods;
 
 	@Field(desc="物流单号", len=50)
 	private long logisticsId;
 
-	@Join(bind = "getLogistics", params = { "tenantId", "orderId" })
+	@Join(request = "QueryGoods.getLogistics", params = { "tenantId", "orderId" })
 	private Logistics logistics;
 
 	@Field(desc="修改日期")

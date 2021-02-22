@@ -1,6 +1,7 @@
 package com.saas.auth.bo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.saas.auth.dao.DAOCustomer;
@@ -10,13 +11,16 @@ import com.saas.auth.request.UserInfoParam;
 import com.saas.auth.vo.Customer;
 import com.saas.auth.vo.UserInfo;
 import com.saas.pub.MD5;
-import com.saas.pub.VerificationCodeService;
+import com.saas.pub.service.VerificationCodeService;
 import com.zpsenior.graphql4j.annotation.Type;
 import com.zpsenior.graphql4j.annotation.Var;
 
 @Type
 @Component("MutationCustomer")
 public class MutationCustomer {
+	
+	@Value("${saas.register.templateCode}")
+	private String registerTemplateCode;
 
 	@Autowired
 	private DAOCustomer customer;
@@ -63,8 +67,8 @@ public class MutationCustomer {
 		return false;
 	}
 
-	public boolean sendVerificationCode(@Var("params") LoginParam params)throws Exception{
-		///verificationCodeService.sendCheckCode(mobileno, templateId, expireTime);
+	public boolean sendVerificationCode(@Var("mobileno") String mobileno)throws Exception{
+		verificationCodeService.sendCheckCode(mobileno, registerTemplateCode, 60);
 		return true;
 	}
 

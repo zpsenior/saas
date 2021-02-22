@@ -13,10 +13,10 @@ import com.saas.goods.vo.GoodsReview;
 @Mapper
 public interface DAOGoodsReview {
 
-	@Select({"select * from goods_review where tenant_id=#{tenantId}"})
+	@Select({"select * from goods_review where tenant_id=#{tenantId} and goods_id=#{goodsId}"})
 	public List<GoodsReview> queryGoodsReviewList(QueryGoodsReviewParam param)throws Exception;
 
-	@Select({"select * from goods_review where tenant_id=#{tenantId} and goods_id=#{goodsId}"})
+	@Select({"select * from goods_review where tenant_id=#{tenantId} and goods_id=#{goodsId} and review_id=#{reviewId}"})
 	public GoodsReview getGoodsReview(GoodsReview review)throws Exception;
 
 	@Insert({

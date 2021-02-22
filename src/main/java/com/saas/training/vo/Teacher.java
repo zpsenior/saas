@@ -58,10 +58,10 @@ public class Teacher {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "queryTeacherReviewList", params = { "tenantId", "staffId" })
+	@Join(request = "QueryTraining.queryTeacherReviewList", params = { "tenantId", "staffId" })
 	private List<TeacherReview> reviews;
 
-	@Join(bind = "queryTeacherCircleList", params = { "tenantId", "staffId" })
+	@Join(request = "QueryTraining.queryTeacherCircleList", params = { "tenantId", "staffId" })
 	private List<TeacherCircle> circles;
 
 }

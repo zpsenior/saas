@@ -27,7 +27,7 @@ public class GoodsFavorite {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "getGoods", params = { "tenantId", "goodsId" })
+	@Join(request = "QueryGoods.getGoods", params = { "tenantId", "goodsId" })
 	private Goods goods;
 
 }

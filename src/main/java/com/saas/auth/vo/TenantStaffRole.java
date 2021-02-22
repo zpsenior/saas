@@ -32,7 +32,7 @@ public class TenantStaffRole {
 	@Field(desc="创建时间")
 	private Date createDate;
 
-	@Join(bind = "queryStaffRolePrivilegeList", params = { "tenantId", "roleId" })
+	@Join(request = "QueryPrivilege.queryStaffRolePrivilegeList", params = { "privileges" })
 	private List<Privilege> privilegeList;
 
 }

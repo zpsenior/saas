@@ -20,7 +20,10 @@ public class QueryPostAddress {
 	private DAOPostAddress postAddress;
 
 	@Field("addressList")
-	public List<PostAddress> queryPostAddressList(@Var("params") PostAddressParam params)throws Exception{
+	public List<PostAddress> queryPostAddressList(@Var("tenantId") String tenantId, @Var("customerId") long customerId)throws Exception{
+		PostAddressParam params = new PostAddressParam();
+		params.setTenantId(tenantId);
+		params.setCustomerId(customerId);
 		return postAddress.queryPostAddressList(params);
 	}
 

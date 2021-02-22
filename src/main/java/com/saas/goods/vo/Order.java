@@ -59,7 +59,7 @@ public class Order {
 	@Field(desc="创建日期")
 	private Date createDate;
 
-	@Join(bind = "queryOrderItemList", params = { "tenantId", "orderId" })
+	@Join(request = "QueryGoodsOrder.queryOrderItemList", params = { "tenantId", "orderId" })
 	private List<OrderItem> items;
 
 }

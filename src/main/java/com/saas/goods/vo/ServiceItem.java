@@ -22,6 +22,9 @@ public class ServiceItem {
 	@Field(isKey=true, desc="服务明细ID")
 	private long serviceItemId;
 
+	@Field(desc="商品ID")
+	private long goodsId;
+
 	@Field(desc="服务商员工ID")
 	private long staffId;
 
@@ -49,9 +52,9 @@ public class ServiceItem {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(bind = "getGoods", params = { "tenantId", "goodsId" })
+	@Join(request = "QueryGoods.getGoods", params = { "tenantId", "goodsId" })
 	private Goods goods;
 
-	@Join(bind = "getTeacher", params = { "tenantId", "staffId" })
+	@Join(request = "QueryTraining.getTeacher", params = { "tenantId", "staffId" })
 	private Teacher teacher;
 }

@@ -1,5 +1,7 @@
 package com.saas.goods.request;
 
+import java.util.Date;
+
 import com.saas.pub.QueryParam;
 import com.zpsenior.graphql4j.annotation.Input;
 
@@ -10,14 +12,18 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-@Input("QueryGoodsReviewParam")
-public class QueryGoodsReviewParam extends QueryParam {
+@Input("QueryGoodsDailyParam")
+public class QueryGoodsDailyParam extends QueryParam {
 
-	public QueryGoodsReviewParam() {
-		super("review_id");
+	public QueryGoodsDailyParam() {
+		super("trade_date");
 	}
-	
+
 	private String tenantId;
-	
+
 	private long goodsId;
+	
+	private Date beginDate;
+	
+	private Date endDate;
 }
