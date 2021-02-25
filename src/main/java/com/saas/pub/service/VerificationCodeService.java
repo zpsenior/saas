@@ -38,7 +38,7 @@ public class VerificationCodeService {
 		if(cacheService == null) {
 			return true;
 		}
-		String code = cacheService.getProperty(mobileno + "_" + templateCode);
+		String code = (String)cacheService.getProperty(mobileno + "_" + templateCode);
 		return code != null && checkCode != null && checkCode.equals(code);
 	}
 

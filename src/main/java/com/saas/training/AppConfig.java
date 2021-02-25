@@ -2,14 +2,26 @@ package com.saas.training;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.saas.auth.session.AdminSession;
+import com.saas.auth.session.CustomerSession;
+import com.saas.auth.session.TenantStaffSession;
+import com.saas.auth.wechat.WechatAuth;
+import com.saas.pub.service.CacheService;
 import com.saas.wpay.WPayNotify;
 
 @Configuration
 public class AppConfig implements WebMvcConfigurer{
+	
+	@Value("${saas.wechat.appId}")
+	private String appId;
+	
+	@Value("${saas.wechat.secret}")
+	private String secret;
 	
 	@Value("${graphql.inputClassPackages}")
 	private String inputClassPackages;
@@ -58,10 +70,13 @@ public class AppConfig implements WebMvcConfigurer{
 	private String adminUrlPattern;
 	
 	@Autowired
-	WPayNotify notify;
+	private WPayNotify notify;
+	
+	@Autowired
+	private CacheService cacheService;
 	
 	public void addInterceptors(InterceptorRegistry registry) {
-		SecurityInterceptor interceptor = new SecurityInterceptor();
+		SecurityInterceptor interceptor = new SecurityInterceptor(cacheService, new CustomerSession());
 		try{
 			interceptor.init(customerQueryClass, customerMutationClass, inputClassPackages, customerQLFile);
 		}catch(Exception e) {
@@ -69,7 +84,7 @@ public class AppConfig implements WebMvcConfigurer{
 			return;
 		}
 		registry.addInterceptor(interceptor).addPathPatterns(customerUrlPattern);
-		interceptor = new SecurityInterceptor();
+		interceptor = new SecurityInterceptor(cacheService, new TenantStaffSession());
 		try{
 			interceptor.init(staffQueryClass, staffMutationClass, inputClassPackages, staffQLFile);
 		}catch(Exception e) {
@@ -77,7 +92,7 @@ public class AppConfig implements WebMvcConfigurer{
 			return;
 		}
 		registry.addInterceptor(interceptor).addPathPatterns(staffUrlPattern);
-		interceptor = new SecurityInterceptor();
+		interceptor = new SecurityInterceptor(cacheService, new AdminSession());
 		try{
 			interceptor.init(adminQueryClass, adminMutationClass, inputClassPackages, adminQLFile);
 		}catch(Exception e) {
@@ -88,5 +103,10 @@ public class AppConfig implements WebMvcConfigurer{
 		if(wpayNotifyPattern != null) {
 			registry.addInterceptor(notify).addPathPatterns(wpayNotifyPattern);
 		}
+	}
+	
+	@Bean
+	public WechatAuth getWechatAuth() {
+		return new WechatAuth(appId, secret);
 	}
 }

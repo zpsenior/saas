@@ -25,13 +25,16 @@ public class Logistics {
 	private long customerId;
 
 	@Field(desc="快递公司")
-	private String expressId;
+	private String expressCompany;
 	
 	@Field(desc="快递单号", len=50)
 	private long expressNo;
 
 	@Field(desc="发出日期")
 	private Date sendOutDate;
+
+	@Field(desc="邮费")
+	private int postage;
 
 	@Field(desc="收件人")
 	private String recipient;

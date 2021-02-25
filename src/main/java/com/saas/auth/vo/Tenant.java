@@ -20,6 +20,9 @@ public class Tenant {
 	@Field(desc="租户名称", len=50)
 	private String tenantName;
 
+	@Field(desc="租户类别", len=50)
+	private TenantCategory tenantCategory;
+
 	@Field(desc="机构代码", len=30)
 	private String license;
 

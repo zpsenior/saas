@@ -15,6 +15,10 @@ public interface DAOStaff {
 
 	@Select({"select * from auth_staff where tenant_id=#{tenantId}"})
 	public List<TenantStaff> queryStaffList(QueryStaffParam param)throws Exception;
+	
+
+	@Select({"select * from auth_staff where openid=#{openid}"})
+	public TenantStaff getStaffByOpenid(TenantStaff params)throws Exception;
 
 	@Select({"select * from auth_staff where tenant_id=#{tenantId} and staff_id=#{staffId}"})
 	public TenantStaff getStaff(TenantStaff staff)throws Exception;
@@ -46,4 +50,5 @@ public interface DAOStaff {
 		"</script>"
 		})
 	public void updateStaff(TenantStaff staff)throws Exception;
+
 }

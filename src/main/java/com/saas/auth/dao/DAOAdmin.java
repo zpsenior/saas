@@ -16,6 +16,9 @@ public interface DAOAdmin {
 	@Select({"select * from auth_admin"})
 	public List<Admin> queryAdminList(QueryAdminParam param)throws Exception;
 
+	@Select({"select * from auth_admin where openid=#{openid}"})
+	public Admin getStaffByOpenid(Admin params)throws Exception;
+
 	@Select({"select * from auth_admin where admin_id=#{id}"})
 	public Admin getAdmin(long adminId)throws Exception;
 

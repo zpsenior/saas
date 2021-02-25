@@ -51,6 +51,9 @@ public class BuildCRUD implements Filter{
 		if(name.startsWith("Query") || name.startsWith("Mutation")) {
 			return true;
 		}
+		if(name.endsWith("Session")) {
+			return true;
+		}
 		return false;
 	}
 

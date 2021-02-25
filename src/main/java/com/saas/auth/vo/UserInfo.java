@@ -17,6 +17,9 @@ public class UserInfo {
 	@Field(isKey=true, desc="用户ID")
 	private long userId;
 	
+	@Field(desc="微信用户唯一标识符")
+	private String unionid;
+	
 	@Field(desc="性别")
 	private Gender gender;
 	
@@ -35,13 +38,13 @@ public class UserInfo {
 	@Field(desc="真实姓名")
 	private String trueName;
 
+	@Field(desc="密码")
+	private String password;
+
 	@Field(desc="修改日期")
 	private Date updateDate;
 
 	@Field(desc="创建日期")
 	private Date createDate;
-
-	@Field(desc="密码")
-	private String password;
 
 }

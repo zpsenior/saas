@@ -33,6 +33,16 @@ public class BuildSQL implements Filter {
 		builder.build(pw, new BuildSQL());
 	}
 
+	public boolean filterType(String name) {
+		if(name.startsWith("Query") || name.startsWith("Mutation")) {
+			return true;
+		}
+		if(name.endsWith("Session")) {
+			return true;
+		}
+		return false;
+	}
+
 	public String mapTableName(String name, String className) {
 		name = SQLBuilder.toUnderscore(name);
 		if(className.startsWith("com.saas.auth")) {

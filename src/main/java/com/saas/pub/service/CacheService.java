@@ -2,7 +2,7 @@ package com.saas.pub.service;
 
 public interface CacheService {
 
-	public void setProperty(String key, String value, int expireTime) ;
+	public void setProperty(String key, Object value, int expireTime) ;
 	
-	public String getProperty(String key) ;
+	public Object getProperty(String key) ;
 }

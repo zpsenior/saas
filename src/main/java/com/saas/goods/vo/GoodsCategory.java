@@ -24,6 +24,9 @@ public class GoodsCategory {
 	
 	@Field(desc="类别图片", len=100)
     private String img;
+
+	@Field(desc="父类别ID")
+	private long parentId;
 	
 	@Field(desc="类别排序")
     private int sort;
@@ -33,6 +36,9 @@ public class GoodsCategory {
 
 	@Field(desc="创建日期")
 	private Date createDate;
+	
+	@Join(request = "QueryGoods.queryChildCategoryList", params = { "tenantId", "categoryId" })
+	private List<Goods> children;
 
 
 	@Join(request = "QueryGoods.queryGoodsList", params = { "tenantId", "categoryId" })

@@ -18,6 +18,9 @@ public interface DAOCustomer {
 
 	@Select({"select * from auth_customer where tenant_id=#{tenantId} and customer_id=#{customerId}"})
 	public Customer getCustomer(Customer customer)throws Exception;
+	
+	@Select({"select * from auth_customer where openid=#{openid}"})
+	public Customer getCustomerByOpenid(Customer customer)throws Exception;
 
 	@Insert({
 		"insert into auth_customer(",

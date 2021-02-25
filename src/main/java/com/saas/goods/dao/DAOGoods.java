@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -22,10 +23,10 @@ public interface DAOGoods {
 		"</script>"})
 	public List<Goods> queryGoodsList(QueryGoodsParam param)throws Exception;
 
-	@Select({"select * from goods where tenant_id=#{tenantId} and parentId=#{parentId}",
+	@Select({"select * from goods where tenant_id=#{tenantId} and parent_id=#{parentId}",
 		"and goodsStatus = '0'",
 		"order by goodsId desc"})
-	public List<Goods> queryGoodsChildList(Goods params)throws Exception;
+	public List<Goods> queryGoodsChildList(@Param("tenantId") String tenantId, @Param("parentId") long parentId)throws Exception;
 
 	@Select({"select * from goods where tenant_id=#{tenantId} and goods_id=#{goodsId}"})
 	public Goods getGoods(Goods goods)throws Exception;

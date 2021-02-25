@@ -36,12 +36,13 @@ public class QueryGoods {
 	@Autowired
 	private DAOGoodsDaily goodsdaily;
 	
+	public List<GoodsCategory> queryChildCategoryList(@Var("tenantId") String tenantId, @Var("categoryId") long categoryId)throws Exception{
+		return category.queryChildCategoryList(tenantId, categoryId);
+	}
 
 	@Field("categories")
 	public List<GoodsCategory> queryGoodsCategoryList(@Var("tenantId") String tenantId)throws Exception{
-		QueryGoodsParam params = new QueryGoodsParam();
-		params.setTenantId(tenantId);
-		return category.queryGoodsCategoryList(params);
+		return category.queryGoodsCategoryList(tenantId);
 	}
 
 	@Field("category")
@@ -62,10 +63,7 @@ public class QueryGoods {
 
 	@Field("goodsChildList")
 	public List<Goods> queryGoodsChildList(@Var("tenantId") String tenantId, @Var("parentId") long parentId)throws Exception{
-		Goods params = new Goods();
-		params.setTenantId(tenantId);
-		params.setParentId(parentId);
-		return goods.queryGoodsChildList(params);
+		return goods.queryGoodsChildList(tenantId, parentId);
 	}
 
 	@Field("goods")

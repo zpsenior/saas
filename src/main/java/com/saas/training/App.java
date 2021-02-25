@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @SpringBootApplication
-@ComponentScan(basePackages={"com.saas.pub.service", "com.saas.*.bo", "com.saas.wpay", "com.saas.aliyun", "com.saas.training"})
+@ComponentScan(basePackages={"com.saas.pub.service", "com.saas.redis", "com.saas.*.bo", "com.saas.wpay", "com.saas.aliyun", "com.saas.training"})
 @MapperScan(basePackages = {"com.saas.auth.dao", "com.saas.payment.dao", "com.saas.goods.dao", "com.saas.training.dao"})
 public class App 
 {

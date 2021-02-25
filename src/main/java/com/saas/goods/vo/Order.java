@@ -26,8 +26,14 @@ public class Order {
 	@Field(desc="订单总金额")
 	private long totalAmount;
 
+	@Field(desc="邮费")
+	private int postage;
+
 	@Field(desc="订单状态")
 	private OrderStatus status;
+
+	@Field(desc="支付类型")
+	private PayType payType;
 
 	@Field(desc="收件人")
 	private String recipient;

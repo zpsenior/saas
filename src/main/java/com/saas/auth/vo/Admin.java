@@ -16,9 +16,9 @@ public class Admin {
 
 	@Field(isKey=true, desc="租户ID")
 	private long adminId;
-	
-	@Field(desc="用户ID")
-	private long userId;
+
+	@Field(desc="微信openid", len=64)
+	private String openid;
 
 	@Field(desc="登录名")
 	private String loginName;
@@ -27,7 +27,7 @@ public class Admin {
 	private String nickname;
 
 	@Field(desc="联系电话")
-	private String mobile;
+	private String mobileno;
 
 	@Field(desc="电子油箱")
 	private String email;

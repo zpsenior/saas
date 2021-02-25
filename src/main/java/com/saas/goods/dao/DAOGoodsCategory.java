@@ -4,17 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.saas.goods.request.QueryGoodsParam;
 import com.saas.goods.vo.GoodsCategory;
 
 @Mapper
 public interface DAOGoodsCategory {
 
-	@Select({"select * from goods_category where tenant_id=#{tenantId} order by sort"})
-	public List<GoodsCategory> queryGoodsCategoryList(QueryGoodsParam param)throws Exception;
+	@Select({"select * from goods_category where tenant_id=#{tenantId} and parent_id=#{categoryId} order by sort"})
+	public List<GoodsCategory> queryChildCategoryList(@Param("tenantId") String tenantId, @Param("categoryId") long categoryId)throws Exception;
+
+	@Select({"select * from goods_category where tenant_id=#{id} and parent_id is null order by sort"})
+	public List<GoodsCategory> queryGoodsCategoryList(String tenantId)throws Exception;
 
 	@Select({"select * from goods_category where tenant_id=#{tenantId} and category_id=#{categoryId}"})
 	public GoodsCategory getGoodsCategory(GoodsCategory category)throws Exception;
@@ -42,5 +45,6 @@ public interface DAOGoodsCategory {
 		})
 
 	public void updateGoodsCategory(GoodsCategory category)throws Exception;
+
 
 }
