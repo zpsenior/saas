@@ -1,0 +1,256 @@
+query teacherList($tenantId:String, 
+	$pageSize:Int, $max:Long, $min:Long, $forward:Boolean, $descending:Boolean){
+	training{
+		teachers(params:{tenantId:$tenantId, 
+			pageSize:$pageSize, 
+			max:$max, 
+			min:$min, 
+			forward:$forward,
+			descending:$descending}){
+			name,
+			title,
+			character,
+			description,
+			portrait,
+			graduation,
+			certificate,
+			specialty,
+			prize
+		}
+	}
+}
+
+query teacherInfo($tenantId:String, $staffId:Long){
+	training{
+		teacher(tenantId:$tenantId, staffId:$staffId){
+			name,
+			title,
+			character,
+			description,
+			portrait,
+			graduation,
+			certificate,
+			specialty,
+			prize,
+			reviews{
+				content,
+				createDate,
+				commentator{
+					nickname
+				}
+			}
+		}
+	}
+}
+
+query schoolInfo($tenantId:String){
+	training{
+		training(tenantId:$tenantId){
+			name,
+			description,
+			address,
+			moblieno,
+			email
+		}
+	}
+}
+
+query myOrders($tenantId:String, $customerId:Long,
+	$pageSize:Int, $max:Long, $min:Long, $forward:Boolean, $descending:Boolean){
+	goodsOrder{
+		orders(params:{tenantId:$tenantId, customerId:$customerId,
+				pageSize:$pageSize, 
+				max:$max, 
+				min:$min, 
+				forward:$forward,
+				descending:$descending}){
+			payDate,
+			createDate,
+			recipient,
+			gender,
+			mobileno,
+			province,
+			city,
+			county,
+			detail,
+			items{
+				count,
+				amount,
+				logisticsId,
+				goods{
+					title,
+					description,
+					imgs,
+					property,
+					price
+				}
+			}
+		}
+	}
+}
+
+query myOrder($tenantId:String, $customerId:Long, $orderId:Long){
+	goodsOrder{
+		order(tenantId:$tenantId, orderId:$orderId){
+			payDate,
+			createDate,
+			recipient,
+			gender,
+			mobileno,
+			province,
+			city,
+			county,
+			detail,
+			items{
+				count,
+				amount,
+				logisticsId,
+				goods{
+					title,
+					description,
+					imgs,
+					property,
+					price
+				}
+			}
+		}
+	}
+}
+
+query myCarts($tenantId:String, $customerId:Long,
+	$pageSize:Int, $max:Long, $min:Long, $forward:Boolean, $descending:Boolean){
+	goodsOrder{
+		carts(params:{tenantId:$tenantId, customerId:$customerId,
+				pageSize:$pageSize, 
+				max:$max, 
+				min:$min, 
+				forward:$forward,
+				descending:$descending}){
+					goods{
+						title,
+						description,
+						imgs,
+						property,
+						price,
+						status
+					}
+		}
+	}
+}
+
+query myCart($tenantId:String, $customerId:Long, $goodsId:Long){
+	goodsOrder{
+		cart(tenantId:$tenantId, customerId:$customerId, goodsId:$goodsId){
+					goods{
+						title,
+						description,
+						imgs,
+						property,
+						price,
+						status
+					}
+		}
+	}
+}
+
+query myFavorites($tenantId:String, $customerId:Long,
+	$pageSize:Int, $max:Long, $min:Long, $forward:Boolean, $descending:Boolean){
+	goodsOrder{
+		favorites(params:{tenantId:$tenantId, customerId:$customerId,
+				pageSize:$pageSize, 
+				max:$max, 
+				min:$min, 
+				forward:$forward,
+				descending:$descending}){
+					goods{
+						title,
+						description,
+						imgs,
+						property,
+						price,
+						status
+					}
+		}
+	}
+}
+
+query myFavorite($tenantId:String, $customerId:Long, $goodsId:Long){
+	goodsOrder{
+		favorite(tenantId:$tenantId, customerId:$customerId, goodsId:$goodsId){
+					goods{
+						title,
+						description,
+						imgs,
+						property,
+						price,
+						status
+					}
+		}
+	}
+}
+
+query myServices($tenantId:String, $customerId:Long,
+	$pageSize:Int, $max:Long, $min:Long, $forward:Boolean, $descending:Boolean){
+	goodsService{
+		services(params:{tenantId:$tenantId, customerId:$customerId,
+				pageSize:$pageSize, 
+				max:$max, 
+				min:$min, 
+				forward:$forward,
+				descending:$descending}){
+					goods{
+						title,
+						description,
+						imgs,
+						property,
+						price,
+						status
+					},
+					spentCount,
+					totalCount
+		}
+	}
+}
+
+query myService($tenantId:String, $serviceId:Long){
+	goodsService{
+		service(tenantId:$tenantId, serviceId:$serviceId){
+					goods{
+						title,
+						description,
+						imgs,
+						property,
+						price,
+						status
+					},
+					spentCount,
+					totalCount
+		}
+	}
+}
+
+query mySchedules($tenantId:String, $customerId:Long){
+	goodsService{
+		serviceSchedules(tenantId:$tenantId, customerId:$customerId){
+			appointDate,
+			items{
+				goods{
+					title,
+					imgs,
+					property
+				},
+				teacher{
+					name,
+					mobileno
+				},
+				beginTime,
+				endTime
+			}
+		}
+	}
+}
+
+#mutation login($loginName:String, $password:String){
+#	customer{
+#	}
+#}

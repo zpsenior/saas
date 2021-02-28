@@ -21,6 +21,9 @@ public class OrderItem {
 	@Field(isKey=true, desc="订单明细ID")
 	private long orderItemId;
 
+	@Field(desc="用户ID")
+	private long customerId;
+
 	@Field(desc="商品ID")
 	private long goodsId;
 
@@ -47,5 +50,14 @@ public class OrderItem {
 
 	@Field(desc="创建日期")
 	private Date createDate;
+	
+	public OrderItem() {}
+	
+	public OrderItem(Goods goods, int count) {
+		this.tenantId = goods.getTenantId();
+		this.goodsId = goods.getGoodsId();
+		this.count = count;
+		this.amount = count * goods.getPrice();
+	}
 
 }

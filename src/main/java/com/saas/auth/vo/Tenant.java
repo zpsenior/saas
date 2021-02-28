@@ -38,6 +38,9 @@ public class Tenant {
 	@Field(desc="注册地址", len=100)
 	private String address;
 
+	@Field(desc="操作员")
+	private long operator;
+
 	@Field(desc="修改日期")
 	private Date updateDate;
 

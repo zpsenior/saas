@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -12,9 +13,12 @@ import com.saas.goods.vo.GoodsCart;
 
 @Mapper
 public interface DAOGoodsCart {
-
+	
 	@Select({"select * from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId}"})
 	public List<GoodsCart> queryGoodsCartList(QueryOrderParam params)throws Exception;
+
+	@Select({"select * from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId}"})
+	public List<GoodsCart> queryMyGoodsCartList(@Param("tenantId") String tenantId, @Param("customerId") long customerId)throws Exception;
 
 	@Select({"select * from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId} and goods_id=#{goodsId}"})
 	public GoodsCart getGoodsCart (GoodsCart cart)throws Exception;
@@ -43,5 +47,6 @@ public interface DAOGoodsCart {
 	
 	@Select({"delete from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId} and goods_id=#{goodsId}"})
 	public void removeGoodsCart(GoodsCart cart)throws Exception;
+
 
 }

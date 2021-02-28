@@ -17,7 +17,7 @@ public class QueryServiceParam extends QueryParam {
 
 	private long customerId;
 
-	private long orderId;
+	private long serviceId;
 
 
 	public QueryServiceParam() {

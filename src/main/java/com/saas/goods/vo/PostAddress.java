@@ -29,7 +29,7 @@ public class PostAddress {
 	private Gender gender;
 
 	@Field(desc="联系电话")
-	private String mobile;
+	private String mobileno;
 
 	@Field(desc="省")
 	private String province;

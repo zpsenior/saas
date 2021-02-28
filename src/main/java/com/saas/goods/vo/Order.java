@@ -58,6 +58,9 @@ public class Order {
 	
 	@Field(desc="支付日期")
 	private Date payDate;
+	
+	@Field(desc="发货日期")
+	private Date sendDate;
 
 	@Field(desc="修改日期")
 	private Date updateDate;
@@ -67,5 +70,17 @@ public class Order {
 
 	@Join(request = "QueryGoodsOrder.queryOrderItemList", params = { "tenantId", "orderId" })
 	private List<OrderItem> items;
+	
+	public Order() {}
+	
+	public Order(PostAddress address) {
+		this.recipient = address.getRecipient();
+		this.gender = address.getGender();
+		this.mobileno = address.getMobileno();
+		this.province = address.getProvince();
+		this.city = address.getCity();
+		this.county = address.getCounty();
+		this.detail = address.getDetail();
+	}
 
 }

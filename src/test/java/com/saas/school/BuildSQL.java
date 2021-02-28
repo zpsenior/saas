@@ -5,8 +5,8 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.saas.training.AdminMutation;
-import com.saas.training.AdminQuery;
+import com.saas.app.admin.AdminMutation;
+import com.saas.app.admin.AdminQuery;
 import com.zpsenior.graphql4j.schema.Schema;
 import com.zpsenior.graphql4j.utils.DBSchemaBuilder;
 import com.zpsenior.graphql4j.utils.SQLBuilder;

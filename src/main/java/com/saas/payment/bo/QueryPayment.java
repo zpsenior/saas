@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component;
 import com.saas.payment.dao.DAOPayment;
 import com.saas.payment.request.QueryPaymentNotifyParam;
 import com.saas.payment.vo.PaymentNotify;
+import com.saas.pub.BOBase;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
 import com.zpsenior.graphql4j.annotation.Var;
 
 @Type
 @Component
-public class QueryPayment {
+public class QueryPayment extends BOBase {
 	
 
 	@Autowired

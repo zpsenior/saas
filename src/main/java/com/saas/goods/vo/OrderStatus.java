@@ -1,7 +1,7 @@
 package com.saas.goods.vo;
 
 public enum OrderStatus {
-	WAITING,
+	PREPAY,
 	PAYED,
 	SENT,
 	RECEIVE

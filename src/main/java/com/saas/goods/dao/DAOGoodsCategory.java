@@ -14,13 +14,13 @@ import com.saas.goods.vo.GoodsCategory;
 public interface DAOGoodsCategory {
 
 	@Select({"select * from goods_category where tenant_id=#{tenantId} and parent_id=#{categoryId} order by sort"})
-	public List<GoodsCategory> queryChildCategoryList(@Param("tenantId") String tenantId, @Param("categoryId") long categoryId)throws Exception;
+	public List<GoodsCategory> queryCategoryChildList(@Param("tenantId") String tenantId, @Param("categoryId") long categoryId)throws Exception;
 
 	@Select({"select * from goods_category where tenant_id=#{id} and parent_id is null order by sort"})
-	public List<GoodsCategory> queryGoodsCategoryList(String tenantId)throws Exception;
+	public List<GoodsCategory> queryCategoryList(String tenantId)throws Exception;
 
 	@Select({"select * from goods_category where tenant_id=#{tenantId} and category_id=#{categoryId}"})
-	public GoodsCategory getGoodsCategory(GoodsCategory category)throws Exception;
+	public GoodsCategory getCategory(GoodsCategory category)throws Exception;
 
 	@Insert({
 		"insert into goods_category(",

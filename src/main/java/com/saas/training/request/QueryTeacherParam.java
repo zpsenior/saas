@@ -13,9 +13,9 @@ import lombok.ToString;
 @Input("QueryTeacherParam")
 public class QueryTeacherParam extends QueryParam {
 	
-	private String tenant;
+	private String tenantId;
 	
-	private String staffId;
+	private long staffId;
 
 	
 	public QueryTeacherParam() {
