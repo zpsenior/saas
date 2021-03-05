@@ -36,16 +36,16 @@ public class QueryGoodsOrder extends BOBase {
 	@Autowired
 	private DAOOrderItem goodsOrderItem;
 	
-	@Field("orders")
-	public List<Order> queryOrderList(@Var("params") QueryOrderParam params)throws Exception{
+	@Field("myOrders")
+	public List<Order> queryMyOrderListByPage(@Var("params") QueryOrderParam params)throws Exception{
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
 		params.setCustomerId(session.getCustomerId());
 		return goodsOrder.queryOrderList(params);
 	}
 
-	@Field("order")
-	public Order getOrder(@Var("orderId") long orderId)throws Exception{
+	@Field("myOrder")
+	public Order getMyOrder(@Var("orderId") long orderId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		Order params = new Order();
 		params.setTenantId(session.getTenantId());
@@ -54,7 +54,7 @@ public class QueryGoodsOrder extends BOBase {
 		return goodsOrder.getOrder(params);
 	}
 
-	public List<OrderItem> queryOrderItemList(@Var("orderId") long orderId)throws Exception{
+	public List<OrderItem> queryMyOrderItemList(@Var("orderId") long orderId)throws Exception{
 		QueryOrderParam params = new QueryOrderParam();
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
@@ -62,8 +62,8 @@ public class QueryGoodsOrder extends BOBase {
 		return goodsOrderItem.queryOrderItemList(params);
 	}
 
-	@Field("orderItem")
-	public OrderItem getOrderItem(@Var("itemId") long orderItemId)throws Exception{
+	@Field("myOrderItem")
+	public OrderItem getMyOrderItem(@Var("itemId") long orderItemId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		OrderItem params = new OrderItem();
 		params.setTenantId(session.getTenantId());
@@ -72,16 +72,16 @@ public class QueryGoodsOrder extends BOBase {
 		return goodsOrderItem.getOrderItem(params);
 	}
 
-	@Field("carts")
-	public List<GoodsCart> queryGoodsCartList(@Var("params") QueryOrderParam params)throws Exception{
+	@Field("myCarts")
+	public List<GoodsCart> queryMyGoodsCartListByPage(@Var("params") QueryOrderParam params)throws Exception{
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
 		params.setCustomerId(session.getCustomerId());
-		return goodsCart.queryGoodsCartList(params);
+		return goodsCart.queryMyGoodsCartList(params);
 	}
 
-	@Field("cart")
-	public GoodsCart getGoodsCart(@Var("goodsId") long goodsId)throws Exception{
+	@Field("myCart")
+	public GoodsCart getMyGoodsCart(@Var("goodsId") long goodsId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		GoodsCart params = new GoodsCart();
 		params.setTenantId(session.getTenantId());
@@ -89,15 +89,15 @@ public class QueryGoodsOrder extends BOBase {
 		return goodsCart.getGoodsCart(params);
 	}
 
-	@Field("favorites")
-	public List<GoodsFavorite> queryGoodsFavoriteList(@Var("params") QueryOrderParam params)throws Exception{
+	@Field("myFavorites")
+	public List<GoodsFavorite> queryGoodsFavoriteListByPage(@Var("params") QueryOrderParam params)throws Exception{
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
 		params.setCustomerId(session.getCustomerId());
 		return goodsFavorite.queryGoodsFavoriteList(params);
 	}
 
-	@Field("favorite")
+	@Field("myFavorite")
 	public GoodsFavorite getGoodsFavorite(@Var("goodsId") long goodsId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		GoodsFavorite params = new GoodsFavorite();

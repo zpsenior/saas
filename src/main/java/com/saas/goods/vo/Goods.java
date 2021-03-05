@@ -43,14 +43,11 @@ public class Goods {
 	@Field(desc="商品类别")
 	private long categoryId;
 	
-	@Join(request = "QueryGoods.queryChildGoodsList", params = { "tenantId", "goodsId" })
-	private List<Goods> children;
-	
-	@Join(request = "QueryGoods.getGoodsCategory", params = { "tenantId", "categoryId" })
-	private GoodsCategory category;
+	@Field(desc="商品供应商")
+	private long provider;
 
 	@Field(desc="是否实体商品")
-	private GoodsEntity entity;
+	private boolean entity;
 
 	@Field(desc="商品状态")
 	private GoodsStatus status;
@@ -61,7 +58,10 @@ public class Goods {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(request = "QueryGoods.queryGoodsReviewList", params = { "tenantId", "goodsId" })
+	@Join(request = "QueryGoods.queryChildGoodsList", params = { "goodsId" })
+	private List<Goods> children;
+	
+	@Join(request = "QueryGoods.queryGoodsReviewList", params = { "goodsId" })
 	private List<GoodsReview> reviews;
 	
 }

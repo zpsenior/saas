@@ -37,11 +37,11 @@ public class GoodsCategory {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(request = "QueryGoods.queryChildCategoryList", params = { "tenantId", "categoryId" })
+	@Join(request = "QueryGoods.queryChildCategoryList", params = {"categoryId" })
 	private List<Goods> children;
 
 
-	@Join(request = "QueryGoods.queryGoodsList", params = { "tenantId", "categoryId" })
+	@Join(request = "QueryGoods.queryGoodsListByPage", params = {"categoryId" })
 	private List<Goods> goodsList;
 
 }

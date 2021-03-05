@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 import com.saas.auth.bo.customer.MutationCustomer;
 import com.saas.goods.bo.customer.MutationGoodsOrder;
-import com.saas.goods.bo.customer.MutationGoodsService;
 import com.saas.goods.bo.customer.MutationPostAddress;
-import com.saas.payment.bo.MutationPayment;
-import com.saas.training.bo.staff.MutationTraining;
+import com.saas.training.bo.customer.MutationCourse;
+import com.saas.training.bo.customer.MutationTeacher;
+import com.saas.training.bo.customer.MutationTraining;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
 
@@ -20,38 +20,28 @@ public class CustomerMutation {
 	private MutationCustomer customer;
 	
 	@Autowired
-	private MutationPayment payment;
-	
-	@Autowired
 	private MutationGoodsOrder goodsOrder;
-	
-	@Autowired
-	private MutationGoodsService goodsService;
 	
 	@Autowired
 	private MutationPostAddress postAddress;
 	
 	@Autowired
 	private MutationTraining training;
+	
+	@Autowired
+	private MutationTeacher teacher;
+	
+	@Autowired
+	private MutationCourse course;
 
 	@Field("customer")
 	public MutationCustomer getCustomer() {
 		return customer;
 	}
 
-	@Field("payment")
-	public MutationPayment getPayment() {
-		return payment;
-	}
-
 	@Field("goodsOrder")
 	public MutationGoodsOrder getGoodsOrder() {
 		return goodsOrder;
-	}
-
-	@Field("goodsService")
-	public MutationGoodsService getGoodsService() {
-		return goodsService;
 	}
 
 	@Field("postAddress")
@@ -63,4 +53,16 @@ public class CustomerMutation {
 	public MutationTraining getTraining() {
 		return training;
 	}
+
+	@Field("teacher")
+	public MutationTeacher getTeacher() {
+		return teacher;
+	}
+
+	@Field("course")
+	public MutationCourse getCourse() {
+		return course;
+	}
+	
+	
 }

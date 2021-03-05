@@ -38,6 +38,15 @@ public class Tenant {
 	@Field(desc="注册地址", len=100)
 	private String address;
 
+	@Field(desc="微信小程序id")
+	private String appId;
+
+	@Field(desc="微信商户id")
+	private String mchid;
+
+	@Field(desc="微信小程序SecretKey")
+	private String appSecretKey;
+
 	@Field(desc="操作员")
 	private long operator;
 

@@ -52,8 +52,7 @@ public class QueryGoods extends BOBase {
 	public List<Goods> queryGoodsList(@Var("params") QueryGoodsParam params)throws Exception{
 		TenantStaffSession session = getStaffSession();
 		params.setTenantId(session.getTenantId());
-		params.setShowParent(true);
-		return goods.queryGoodsList(params);
+		return goods.searchGoodsList(params);
 	}
 
 	@Field("goods")

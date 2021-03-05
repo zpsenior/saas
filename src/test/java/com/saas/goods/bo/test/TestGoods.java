@@ -3,7 +3,10 @@ package com.saas.goods.bo.test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestGoods1 extends TestBase {
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+public class TestGoods extends TestBase {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,7 +22,7 @@ public class TestGoods1 extends TestBase {
 	}
 	
 	public static void testUpdateGoods() throws Exception{
-		Map<String, String> params = new HashMap<>();
+		ObjectNode params = (new ObjectMapper()).createObjectNode();
 		
 		params.put("", "");
 		

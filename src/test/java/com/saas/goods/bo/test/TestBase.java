@@ -15,13 +15,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TestBase {
 	
-	public static JsonNode post(String request, String content) throws Exception{
+	public static JsonNode post(String request, JsonNode params) throws Exception{
 		
 		CloseableHttpClient client = HttpClientBuilder.create().build();
 		
 		HttpPost httpPost = new HttpPost("http://localhost:8080/" + request);
 		
 		httpPost.setHeader("Content-Type","application/json;charset=utf-8");
+		
+		String content = params.toString();
 		
 		StringEntity body = new StringEntity(content, "utf-8");
 		

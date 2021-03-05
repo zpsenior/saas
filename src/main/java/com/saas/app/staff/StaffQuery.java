@@ -7,8 +7,8 @@ import com.saas.auth.bo.staff.QueryCustomer;
 import com.saas.auth.bo.staff.QueryStaff;
 import com.saas.goods.bo.staff.QueryGoods;
 import com.saas.goods.bo.staff.QueryGoodsOrder;
-import com.saas.goods.bo.staff.QueryGoodsService;
-import com.saas.payment.bo.QueryPayment;
+import com.saas.training.bo.staff.QueryCourse;
+import com.saas.training.bo.staff.QueryTeacher;
 import com.saas.training.bo.staff.QueryTraining;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
@@ -25,19 +25,19 @@ public class StaffQuery {
 	private QueryCustomer customer;
 	
 	@Autowired
-	private QueryPayment payment;
-	
-	@Autowired
 	private QueryGoods goods;
 	
 	@Autowired
 	private QueryGoodsOrder goodsOrder;
-	
-	@Autowired
-	private QueryGoodsService goodsService;
 
 	@Autowired
 	private QueryTraining training;
+
+	@Autowired
+	private QueryTeacher teacher;
+
+	@Autowired
+	private QueryCourse course;
 
 	@Field("staff")
 	public QueryStaff getStaff() {
@@ -47,11 +47,6 @@ public class StaffQuery {
 	@Field("customer")
 	public QueryCustomer getCustomer() {
 		return customer;
-	}
-
-	@Field("payment")
-	public QueryPayment getPayment() {
-		return payment;
 	}
 
 	@Field("goods")
@@ -64,13 +59,18 @@ public class StaffQuery {
 		return goodsOrder;
 	}
 
-	@Field("goodsService")
-	public QueryGoodsService getGoodsService() {
-		return goodsService;
-	}
-
 	@Field("training")
 	public QueryTraining getTraining() {
 		return training;
+	}
+
+	@Field("teacher")
+	public QueryTeacher getTeacher() {
+		return teacher;
+	}
+
+	@Field("course")
+	public QueryCourse getCourse() {
+		return course;
 	}
 }

@@ -33,40 +33,39 @@ public class QueryGoods extends BOBase {
 	@Autowired
 	private DAOGoodsReview reviews;
 	
-	public List<GoodsCategory> queryCategoryChildList(@Var("categoryId") long categoryId)throws Exception{
+
+	@Field("searchGoods")
+	public List<Goods> searchGoodsListByPage(@Var("params") QueryGoodsParam params)throws Exception{
+		CustomerSession session = getCustomerSession();
+		params.setTenantId(session.getTenantId());
+		params.setShowParent(true);
+		return goods.searchGoodsList(params);
+	}
+
+	@Field("categories")
+	public List<GoodsCategory> queryCategoryList()throws Exception{
+		CustomerSession session = getCustomerSession();
+		String tenantId = session.getTenantId();
+		return category.queryCategoryList(tenantId);
+	}
+	
+	public List<GoodsCategory> queryChildCategoryList(@Var("categoryId") long categoryId)throws Exception{
 		TenantStaffSession session = getStaffSession();
 		String tenantId = session.getTenantId();
 		return category.queryCategoryChildList(tenantId, categoryId);
 	}
 
-	@Field("categories")
-	public List<GoodsCategory> queryGoodsCategoryList()throws Exception{
-		CustomerSession session = getCustomerSession();
-		String tenantId = session.getTenantId();
-		return category.queryCategoryList(tenantId);
-	}
-
-	@Field("category")
-	public GoodsCategory getGoodsCategory(@Var("categoryId") long categoryId)throws Exception{
-		GoodsCategory params = new GoodsCategory();
-		CustomerSession session = getCustomerSession();
-		params.setTenantId(session.getTenantId());
-		params.setCategoryId(categoryId);
-		return category.getCategory(params);
-	}
-
 	@Field("goodsList")
-	public List<Goods> queryGoodsList(@Var("params") QueryGoodsParam params)throws Exception{
+	public List<Goods> queryGoodsListByPage(@Var("params") QueryGoodsParam params)throws Exception{
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
-		params.setShowParent(true);
 		return goods.queryGoodsList(params);
 	}
 
-	public List<Goods> queryGoodsChildList(@Var("parentId") long parentId)throws Exception{
+	public List<Goods> queryChildGoodsList(@Var("parentId") long parentId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		String tenantId = session.getTenantId();
-		return goods.queryGoodsChildList(tenantId, parentId);
+		return goods.queryChildGoodsList(tenantId, parentId);
 	}
 
 	@Field("goods")
@@ -79,7 +78,7 @@ public class QueryGoods extends BOBase {
 	}
 
 	@Field("goodsReviews")
-	public List<GoodsReview> queryGoodsReviewList(@Var("goodsId") long goodsId)throws Exception{
+	public List<GoodsReview> queryGoodsReviewListByPage(@Var("goodsId") long goodsId)throws Exception{
 		QueryGoodsReviewParam params = new QueryGoodsReviewParam();
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());

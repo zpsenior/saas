@@ -54,7 +54,7 @@ public class MutationGoodsOrder extends BOBase {
 		CustomerSession session = getCustomerSession();
 		String tenantId = session.getTenantId();
 		long customerId = session.getCustomerId();
-		List<GoodsCart> carts = goodsCart.queryMyGoodsCartList(tenantId, customerId);
+		List<GoodsCart> carts = goodsCart.queryAllMyGoodsCartList(tenantId, customerId);
 		if(carts == null || carts.size() <= 0) {
 			throw new RuntimeException("empty goods carts!");
 		}
@@ -153,8 +153,8 @@ public class MutationGoodsOrder extends BOBase {
 		return true;
 	}
 	
-	@Field("addCart")
-	public boolean addGoodsCart(@Var("goodsId") long goodsId, @Var("count") int count)throws Exception{
+	@Field("addMyCart")
+	public boolean addMyGoodsCart(@Var("goodsId") long goodsId, @Var("count") int count)throws Exception{
 		CustomerSession session = getCustomerSession();
 		String tenantId = session.getTenantId();
 		long customerId = session.getCustomerId();
@@ -167,8 +167,8 @@ public class MutationGoodsOrder extends BOBase {
 		return true;
 	}
 	
-	@Field("updateCart")
-	public boolean updateGoodsCart(@Var("goodsId") long goodsId, @Var("count") int count)throws Exception{
+	@Field("updateMyCart")
+	public boolean updateMyGoodsCart(@Var("goodsId") long goodsId, @Var("count") int count)throws Exception{
 		CustomerSession session = getCustomerSession();
 		String tenantId = session.getTenantId();
 		long customerId = session.getCustomerId();
@@ -181,8 +181,8 @@ public class MutationGoodsOrder extends BOBase {
 		return true;
 	}
 	
-	@Field("removeCart")
-	public boolean removeGoodsCart(@Var("goodsId") long goodsId)throws Exception{
+	@Field("removeMyCart")
+	public boolean removeMyGoodsCart(@Var("goodsId") long goodsId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		String tenantId = session.getTenantId();
 		long customerId = session.getCustomerId();
@@ -194,8 +194,8 @@ public class MutationGoodsOrder extends BOBase {
 		return true;
 	}
 	
-	@Field("addFavorite")
-	public boolean addGoodsFavorite(@Var("goodsId") long goodsId)throws Exception{
+	@Field("addMyFavorite")
+	public boolean addMyGoodsFavorite(@Var("goodsId") long goodsId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		String tenantId = session.getTenantId();
 		long customerId = session.getCustomerId();
@@ -207,8 +207,8 @@ public class MutationGoodsOrder extends BOBase {
 		return true;
 	}
 	
-	@Field("removeFavorite")
-	public boolean removeGoodsFavorite( @Var("goodsId") long goodsId)throws Exception{
+	@Field("removeMyFavorite")
+	public boolean removeMyGoodsFavorite( @Var("goodsId") long goodsId)throws Exception{
 		CustomerSession session = getCustomerSession();
 		String tenantId = session.getTenantId();
 		long customerId = session.getCustomerId();

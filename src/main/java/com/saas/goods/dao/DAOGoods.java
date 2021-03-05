@@ -17,16 +17,21 @@ public interface DAOGoods {
 	@Select({"<script>",
 		"select * from goods where tenant_id=#{tenantId}",
 		"and goodsStatus = '0'",
-		"<if test='showParent==true'>and parent_id is null</if>",
 		"<if test='title!=null'>and title like '%${title}%'</if>",
 		"order by goodsId desc",
 		"</script>"})
-	public List<Goods> queryGoodsList(QueryGoodsParam param)throws Exception;
+	public List<Goods> searchGoodsList(QueryGoodsParam params)throws Exception;
+
+	@Select({"select * from goods where tenant_id=#{tenantId}",
+		"and goodsStatus = '0' and category_id=#{categoryId}",
+		"and parent_id = '0'",
+		"order by goodsId desc"})
+	public List<Goods> queryGoodsList(QueryGoodsParam params)throws Exception;
 
 	@Select({"select * from goods where tenant_id=#{tenantId} and parent_id=#{parentId}",
 		"and goodsStatus = '0'",
 		"order by goodsId desc"})
-	public List<Goods> queryGoodsChildList(@Param("tenantId") String tenantId, @Param("parentId") long parentId)throws Exception;
+	public List<Goods> queryChildGoodsList(@Param("tenantId") String tenantId, @Param("parentId") long parentId)throws Exception;
 
 	@Select({"select * from goods where tenant_id=#{tenantId} and goods_id=#{goodsId}"})
 	public Goods getGoods(Goods goods)throws Exception;

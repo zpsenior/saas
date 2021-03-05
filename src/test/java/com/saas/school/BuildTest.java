@@ -92,11 +92,22 @@ public class BuildTest {
 	}
 
 	private static void printTestMethod(PrintWriter pw, String mapName, Method method) {
+		boolean isPost = false;
+		if(method.getParameterCount() == 1) {
+			Class<?> paramClass = method.getParameters()[0].getType();
+			if(!paramClass.isPrimitive()) {
+				isPost = true;
+			}
+		}
 		pw.print("	public static void ");
 		pw.print("test");
 		pw.print(method.getName());
 		pw.println("() throws Exception{");
-		pw.println("		Map<String, String> params = new HashMap<>();");
+		if(isPost) {
+			pw.println("		ObjectNode params = (new ObjectMapper()).createObjectNode();");
+		}else {
+			pw.println("		Map<String, String> params = new HashMap<>();");
+		}
 		for(Parameter param : method.getParameters()) {
 			Var var = param.getAnnotation(Var.class);
 			pw.print("		params.put(");
@@ -108,7 +119,13 @@ public class BuildTest {
 			pw.print("\"\"");
 			pw.println(");");
 		}
-		pw.println("		get(\"/staff/" + mapName + "\", params);");
+		pw.print("		");
+		if(isPost) {
+			pw.print("post");
+		}else {
+			pw.print("get");
+		}
+		pw.println("(\"/staff/" + mapName + "\", params);");
 		pw.println("	}");
 	}
 

@@ -3,12 +3,13 @@ package com.saas.school;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import com.saas.app.admin.AdminMutation;
-import com.saas.app.admin.AdminQuery;
+import com.saas.app.customer.CustomerMutation;
+import com.saas.app.customer.CustomerQuery;
 import com.zpsenior.graphql4j.schema.Schema;
 import com.zpsenior.graphql4j.utils.CRUDBuilder;
 import com.zpsenior.graphql4j.utils.SQLBuilder;
 import com.zpsenior.graphql4j.utils.SQLBuilder.Filter;
+import com.zpsenior.graphql4j.utils.SQLBuilder.SQLType;
 
 public class BuildCRUD implements Filter{
 
@@ -30,7 +31,7 @@ public class BuildCRUD implements Filter{
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		try {
-			doBuild(pw, AdminQuery.class, AdminMutation.class);
+			doBuild(pw, CustomerQuery.class, CustomerMutation.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,7 +45,7 @@ public class BuildCRUD implements Filter{
 		Schema schema = new Schema(query, mutation);
 		System.out.println(schema.toString());
 		CRUDBuilder builder = new CRUDBuilder(schema);
-		builder.build(pw, query, mutation, new BuildCRUD());
+		builder.build(pw, new BuildCRUD());
 	}
 
 	public boolean filterType(String name) {
@@ -57,11 +58,11 @@ public class BuildCRUD implements Filter{
 		return false;
 	}
 
-	public boolean filterField(String sqlType, String field) {
-		if("insert".equals(sqlType) && "updateDate".equals(field)) {
+	public boolean filterField(SQLType sqlType, String field) {
+		if(sqlType == SQLType.Insert && "updateDate".equals(field)) {
 			return true;
 		}
-		if("update".equals(sqlType) && "createDate".equals(field)) {
+		if(sqlType == SQLType.Update && "createDate".equals(field)) {
 			return true;
 		}
 		return false;

@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Type
-public class CourseSchedule {
+public class CourseStudentSchedule {
 
 	@Field
 	private Date appointDate;

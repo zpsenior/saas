@@ -21,7 +21,7 @@ public class QueryPostAddress extends BOBase {
 	@Autowired
 	private DAOPostAddress postAddress;
 
-	@Field("addressList")
+	@Field("myAddressList")
 	public List<PostAddress> queryPostAddressList()throws Exception{
 		PostAddressParam params = new PostAddressParam();
 		CustomerSession session = getCustomerSession();
@@ -30,7 +30,7 @@ public class QueryPostAddress extends BOBase {
 		return postAddress.queryPostAddressList(params);
 	}
 
-	@Field("address")
+	@Field("myAddress")
 	public PostAddress getPostAddress(@Var("addressId") long addressId)throws Exception{
 		PostAddress params = new PostAddress();
 		CustomerSession session = getCustomerSession();

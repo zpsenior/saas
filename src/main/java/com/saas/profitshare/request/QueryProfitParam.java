@@ -1,4 +1,4 @@
-package com.saas.goods.request;
+package com.saas.profitshare.request;
 
 import com.saas.pub.QueryParam;
 import com.zpsenior.graphql4j.annotation.Input;
@@ -7,22 +7,19 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-@Input("QueryGoodsParam")
-public class QueryGoodsParam extends QueryParam {
+@Input("QueryProfitParam")
+public class QueryProfitParam extends QueryParam {
 
-	private String goodsTitle;
+	public QueryProfitParam() {
+		super("share_id");
+	}
 	
 	private String tenantId;
 	
-	private long categoryId;
-	
-	private boolean showParent = false;
-
-	public QueryGoodsParam() {
-		super("goods_id");
-	}
+	private long ownerId;
 
 }

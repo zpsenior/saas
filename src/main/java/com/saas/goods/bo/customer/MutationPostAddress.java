@@ -18,8 +18,8 @@ public class MutationPostAddress extends BOBase {
 	@Autowired
 	private DAOPostAddress postAddress;
 	
-	@Field("add")
-	public boolean addPostAddress(@Var("params") PostAddressParam params)throws Exception{
+	@Field("addMyAddress")
+	public boolean addMyPostAddress(@Var("params") PostAddressParam params)throws Exception{
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
 		params.setCustomerId(session.getCustomerId());
@@ -28,8 +28,8 @@ public class MutationPostAddress extends BOBase {
 	}
 	
 	
-	@Field("update")
-	public boolean updatePostAddress(@Var("params") PostAddressParam params)throws Exception{
+	@Field("updateMyAddress")
+	public boolean updateMyPostAddress(@Var("params") PostAddressParam params)throws Exception{
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
 		params.setCustomerId(session.getCustomerId());
@@ -37,8 +37,8 @@ public class MutationPostAddress extends BOBase {
 		return true;
 	}
 	
-	@Field("remove")
-	public boolean removePostAddress(@Var("addressId") long addressId)throws Exception{
+	@Field("removeMyAddress")
+	public boolean removeMyPostAddress(@Var("addressId") long addressId)throws Exception{
 		PostAddressParam params = new PostAddressParam();
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());

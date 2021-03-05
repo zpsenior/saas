@@ -9,9 +9,7 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.saas.auth.session.CustomerSession;
 import com.saas.auth.session.Session;
-import com.saas.auth.session.TenantStaffSession;
 
 //import org.springframework.web.context.WebApplicationContext;
 //import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -90,27 +88,7 @@ public class SecurityInterceptor extends GraphQLInterceptor {
 			Map<String, String> params = validateParam(request);
 			finder = new StringParamFinder(params);
 		}
-		addDefaultParam(finder);
 		return finder;
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void addDefaultParam(ParamFinder finder) {
-		String key = session.getPrefixKey() + Thread.currentThread().getId();
-		String sessionId = (String)cacheService.getProperty(key);
-		Session session = (Session)cacheService.getProperty(sessionId);
-		if(session == null) {
-			return;
-		}
-		String tenantId = null;
-		if(session instanceof TenantStaffSession) {
-			tenantId = ((TenantStaffSession)session).getTenantId();
-		}else if(session instanceof CustomerSession) {
-			tenantId = ((CustomerSession)session).getTenantId();
-		}
-		if(tenantId != null) {
-			finder.addParam("tenantId", tenantId);
-		}
 	}
 
 	protected Map<String, String> validateParam(HttpServletRequest request)throws Exception{

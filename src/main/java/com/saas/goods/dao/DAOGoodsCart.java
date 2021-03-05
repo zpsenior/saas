@@ -15,10 +15,10 @@ import com.saas.goods.vo.GoodsCart;
 public interface DAOGoodsCart {
 	
 	@Select({"select * from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId}"})
-	public List<GoodsCart> queryGoodsCartList(QueryOrderParam params)throws Exception;
-
+	public List<GoodsCart> queryAllMyGoodsCartList(@Param("tenantId") String tenantId, @Param("customerId") long customerId)throws Exception;
+	
 	@Select({"select * from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId}"})
-	public List<GoodsCart> queryMyGoodsCartList(@Param("tenantId") String tenantId, @Param("customerId") long customerId)throws Exception;
+	public List<GoodsCart> queryMyGoodsCartList(@Param("params") QueryOrderParam params)throws Exception;
 
 	@Select({"select * from goods_cart where tenant_id=#{tenantId} and customer_id=#{customerId} and goods_id=#{goodsId}"})
 	public GoodsCart getGoodsCart (GoodsCart cart)throws Exception;

@@ -43,6 +43,12 @@ public class PostAddress {
 	@Field(desc="详细地址", len=100)
 	private String detail;
 
+	@Field(desc="邮政编码", len=6)
+	private String zipCode;
+
+	@Field(desc="是否默认地址")
+	private boolean isDefault;
+
 	@Field(desc="修改日期")
 	private Date updateDate;
 

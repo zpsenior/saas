@@ -16,7 +16,7 @@ import com.saas.training.dao.DAOCourseItem;
 import com.saas.training.request.QueryCourseParam;
 import com.saas.training.vo.Course;
 import com.saas.training.vo.CourseItem;
-import com.saas.training.vo.CourseSchedule;
+import com.saas.training.vo.CourseStudentSchedule;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
 import com.zpsenior.graphql4j.annotation.Var;
@@ -36,7 +36,6 @@ public class QueryCourse extends BOBase {
 	public List<Course> queryCourseList(@Var("params") QueryCourseParam params)throws Exception{
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
-		params.setCustomerId(session.getCustomerId());
 		return course.queryCourseList(params);
 	}
 
@@ -45,7 +44,6 @@ public class QueryCourse extends BOBase {
 		Course params = new Course();
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
-		params.setCustomerId(session.getCustomerId());
 		params.setCourseId(courseId);
 		return course.getCourse(params);
 	}
@@ -54,7 +52,6 @@ public class QueryCourse extends BOBase {
 		QueryCourseParam params = new QueryCourseParam();
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
-		params.setCustomerId(session.getCustomerId());
 		params.setCourseId(courseId);
 		return courseItem.queryCourseItemList(params);
 	}
@@ -64,29 +61,28 @@ public class QueryCourse extends BOBase {
 		CourseItem params = new CourseItem();
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
-		params.setCustomerId(session.getCustomerId());
 		params.setCourseItemId(itemId);
 		return courseItem.getCourseItem(params);
 	}
 
 	@Field("courseSchedules")
-	public List<CourseSchedule> queryCourseScheduleList()throws Exception{
+	public List<CourseStudentSchedule> queryCourseScheduleList()throws Exception{
 		QueryCourseParam params = new QueryCourseParam();
 		CustomerSession session = getCustomerSession();
 		params.setTenantId(session.getTenantId());
 		params.setCustomerId(session.getCustomerId());
 		List<CourseItem> items = courseItem.queryCourseItemList(params);
-		Map<Date, CourseSchedule> maps = new TreeMap<>();
+		Map<Date, CourseStudentSchedule> maps = new TreeMap<>();
 		for(CourseItem item : items) {
 			Date dt = item.getAppointDate();
-			CourseSchedule schedule = maps.get(dt);
+			CourseStudentSchedule schedule = maps.get(dt);
 			if(schedule == null) {
-				schedule = new CourseSchedule();
+				schedule = new CourseStudentSchedule();
 				schedule.setAppointDate(dt);
 				maps.put(dt, schedule);
 			}
 			schedule.addItem(item);
 		}
-		return new ArrayList<CourseSchedule>(maps.values());
+		return new ArrayList<CourseStudentSchedule>(maps.values());
 	}
 }

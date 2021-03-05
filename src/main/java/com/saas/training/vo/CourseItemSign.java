@@ -8,8 +8,8 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="机构课程表", incr="courseId")
-public class Course {
+@Type(desc="课程签到表")
+public class CourseItemSign {
 
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
@@ -17,15 +17,16 @@ public class Course {
 	@Field(isKey=true, desc="课程ID")
 	private long courseId;
 
-	@Field(desc="服务员工ID")
-	private long staffId;
+	@Field(isKey=true, desc="服务明细ID")
+	private long courseItemId;
 
-	@Field(desc="商品ID")
-	private long goodsId;
+	@Field(isKey=true, desc="用户ID")
+	private long customerId;
 
-	@Field(desc="课程次数")
-	private int courseTime;
+	@Field(desc="签到时间")
+	private Date signIn;
 
 	@Field(desc="创建日期")
 	private Date createDate;
+
 }
