@@ -11,11 +11,12 @@ import com.saas.floweret.dao.DAOMemberCircle;
 import com.saas.floweret.dao.DAOMemberCircleReview;
 import com.saas.floweret.dao.DAOMemberInfo;
 import com.saas.floweret.dao.DAOMemberRequest;
+import com.saas.pub.BOBase;
 import com.zpsenior.graphql4j.annotation.Type;
 
 @Service
 @Type
-public class CustomerMutation {
+public class CustomerMutation extends BOBase {
 	
 	@Autowired
 	private DAOGroup group;

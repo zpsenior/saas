@@ -3,6 +3,7 @@ package com.saas.floweret.vo;
 import java.util.Date;
 
 import com.saas.auth.vo.Marriage;
+import com.saas.pub.Scope;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Type;
 
@@ -21,14 +22,17 @@ public class MemberRequest {
 	@Field(desc="婚姻状况")
 	private Marriage marriage;
 
+	@Field(desc="年龄(公元年)")
+	private Scope ageScope;
+
 	@Field(desc="身高(cm)")
-	private int height;
+	private Scope heightScope;
 
 	@Field(desc="体重(斤)")
-	private int weight;
+	private Scope weightScope;
 
-	@Field(desc="月薪")
-	private SalaryScope salaryScope;
+	@Field(desc="月薪（k）")
+	private Scope salaryScope;
 
 	@Field(desc="职业")
 	private String[] occupations;

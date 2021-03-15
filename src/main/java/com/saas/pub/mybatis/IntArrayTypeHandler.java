@@ -10,48 +10,57 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
 
-@MappedTypes({String[].class})
-public class StrArrayTypeHandler implements TypeHandler<String[]> {
+@MappedTypes({int[].class})
+public class IntArrayTypeHandler implements TypeHandler<int[]> {
 	
 	private final static String DELIMIT = ",";
 
-	public StrArrayTypeHandler() {
+	public IntArrayTypeHandler() {
 	}
 
-	public String[] getResult(ResultSet rs, String columnName) throws SQLException {
+	private int[] convertTo(String columnValue) {
+		String[] strs = columnValue.split(DELIMIT);
+		int[] results = new int[strs.length];
+		for(int i = 0; i < results.length; i++) {
+			results[i] = Integer.parseInt(strs[i]);
+		}
+		return results;
+	}
+
+	public int[] getResult(ResultSet rs, String columnName) throws SQLException {
 		String columnValue = rs.getString(columnName); 
 		if(columnValue == null){
 			return null;
 		}
-		return columnValue.split(DELIMIT);
+		return convertTo(columnValue);
 	}
 
-	public String[] getResult(ResultSet rs, int columnIndex) throws SQLException {
+	public int[] getResult(ResultSet rs, int columnIndex) throws SQLException {
 		String columnValue = rs.getString(columnIndex); 
 		if(columnValue == null){
 			return null;
 		}
-		return columnValue.split(DELIMIT);
+		return convertTo(columnValue);
 	}
 
-	public String[] getResult(CallableStatement cs, int columnIndex)throws SQLException {
+	public int[] getResult(CallableStatement cs, int columnIndex)throws SQLException {
 		String columnValue = cs.getString(columnIndex); 
 		if(columnValue == null){
 			return null;
 		}
-		return columnValue.split(DELIMIT);
+		return convertTo(columnValue);
 	}
 
-	public void setParameter(PreparedStatement ps, int i, String[] parameter, JdbcType jdbcType) throws SQLException {
+	public void setParameter(PreparedStatement ps, int i, int[] parameter, JdbcType jdbcType) throws SQLException {
 		if (parameter == null)
 			ps.setNull(i, Types.VARCHAR);
 		else {
 			StringBuffer sb = new StringBuffer();
-			for(String str : parameter){
+			for(int value : parameter){
 				if(sb.length() > 0){
 					sb.append(DELIMIT);
 				}
-				sb.append(str);
+				sb.append(value);
 			}
 			ps.setString(i, sb.toString());
 		}

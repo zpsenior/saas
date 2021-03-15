@@ -8,30 +8,28 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="群员表")
-public class GroupMember {
+@Type(desc="用户调查表")
+public class MemberQuestionnaire {
 
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 
-	@Field(isKey=true, desc="群ID")
-	private long groupId;
-
 	@Field(isKey=true, desc="用户ID")
 	private long customerId;
 
-	@Field(desc="成员ID")
-	private long memberNo;
+	@Field(isKey=true, desc="问题ID")
+	private long questionId;
 
-	@Field(desc="成员昵称")
-	private long memberNickname;
+	@Field(desc="开始时间")
+	private Date beginTime;
+
+	@Field(desc="结束时间")
+	private Date endTime;
 	
-	@Field(desc="支付金额")
-	private long payAmount;
-	
-	@Field(desc="支付订单号")
-	private String outTradeNo;
+	@Field(desc="总得分")
+	private int[] totalScore;
 
 	@Field(desc="创建日期")
 	private Date createDate;
+
 }

@@ -44,7 +44,7 @@ public class CurrencyTypeHandler implements TypeHandler<Currency> {
 
 	public void setParameter(PreparedStatement ps, int i, Currency parameter, JdbcType jdbcType) throws SQLException {
 		if (parameter == null)
-			ps.setNull(i, Types.NUMERIC);
+			ps.setNull(i, Types.VARCHAR);
 		else {
 			ps.setDouble(i, parameter.doubleValue());
 		}

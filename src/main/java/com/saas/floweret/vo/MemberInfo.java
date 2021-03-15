@@ -1,9 +1,11 @@
 package com.saas.floweret.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import com.saas.auth.vo.Gender;
 import com.saas.auth.vo.Marriage;
+import com.saas.pub.Scope;
 import com.zpsenior.graphql4j.annotation.Field;
 import com.zpsenior.graphql4j.annotation.Join;
 import com.zpsenior.graphql4j.annotation.Type;
@@ -26,10 +28,10 @@ public class MemberInfo {
 	@Field(desc="昵称")
 	private String nickname;
 
-	@Field(desc="头像")
+	@Field(desc="头像（照片文件保存路径）")
 	private String headImg;
 
-	@Field(desc="展现照片")
+	@Field(desc="展现照片（照片文件保存路径）")
 	private String[] imgs;
 
 	@Field(desc="性别")
@@ -60,7 +62,7 @@ public class MemberInfo {
 	private int weight;
 
 	@Field(desc="月薪范围")
-	private SalaryScope salaryScope;
+	private Scope salaryScope;
 
 	@Field(desc="联系方式")
 	private String contact;
@@ -80,11 +82,17 @@ public class MemberInfo {
 	@Field(desc="房屋地点")
 	private String houseLocation;
 	
-	@Field(desc="兴趣爱好")
-	private String[] interests;
-	
 	@Field(desc="自我介绍")
 	private String description;
+	
+	@Field(desc="个性宣言（声音文件保存路径）")
+	private String voice;
+	
+	@Field(desc="被关注次数")
+	private int attentionMeCount;
+	
+	@Field(desc="关注次数")
+	private int attentionOtherCount;
 
 	@Field(desc="修改日期")
 	private Date updateDate;
@@ -92,7 +100,10 @@ public class MemberInfo {
 	@Field(desc="创建日期")
 	private Date createDate;
 	
-	@Join(request="getMyRequest", params= {"tenantId", "customerId"})
+	@Join(request = "queryMyHobbyList", params= {"tenantId", "customerId"})
+	private List<MemberHobby> hobies;
+	
+	@Join(request = "getMyRequest", params= {"tenantId", "customerId"})
 	private MemberRequest request;
 
 }

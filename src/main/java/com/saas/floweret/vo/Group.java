@@ -22,14 +22,29 @@ public class Group {
 	@Field(desc="群名称", len=100)
 	private String title;
 	
-	@Field(desc="群介绍")
+	@Field(desc="群介绍", len=1000)
 	private String description;
 	
 	@Field(desc="群主")
 	private long owner;
 	
-	@Field(desc="最大群员数")
-	private int maxCount;
+	@Field(desc="最大女群员数")
+	private int maxFemaleCount;
+	
+	@Field(desc="女群员数")
+	private int femaleCount;
+	
+	@Field(desc="最大男群员数")
+	private int maxMaleCount;
+	
+	@Field(desc="男群员数")
+	private int maleCount;
+
+	@Field(desc="开始时间")
+	private Date beginTime;
+
+	@Field(desc="结束时间")
+	private Date endTime;
 
 	@Field(desc="是否线上活动")
 	private boolean online;
