@@ -31,4 +31,8 @@ public class CustomerSession extends Session {
 	public String getSessionId() {
 		return getSessionKey();
 	}
+
+	public boolean isMale() {
+		return false;
+	}
 }

@@ -55,22 +55,31 @@ public class CustomerQuery extends BOBase {
 
 	@Field("groups")
 	public List<Group> queryGroupList(QueryGroupParam params)throws Exception{
-		return null;
+		return group.queryGroupList(params);
+	}
+
+	@Field("myGroups")
+	public List<Group> queryMyGroupList(QueryGroupParam params)throws Exception{
+		return group.queryMyGroupList(params);
 	}
 
 	@Field("group")
 	public Group getGroup(long groupId)throws Exception{
-		return null;
+		Group params = new Group();
+		params.setGroupId(groupId);
+		return group.selectOne(params);
 	}
 
-	@Field("groupMembers")
-	public List<GroupMember> queryGroupMmeberList(QueryMemberParam params)throws Exception{
-		return null;
+	public List<GroupMember> queryMemberListByGroupId(QueryMemberParam params)throws Exception{
+		return groupMember.queryGroupMemberList(params);
 	}
 
 	@Field("groupMember")
-	public GroupMember getGroupMember(long groupId, long customerId)throws Exception{
-		return null;
+	public GroupMember getGroupMember(long groupId, long memberId)throws Exception{
+		GroupMember params = new GroupMember();
+		params.setGroupId(groupId);
+		params.setMemberNo(memberId);
+		return groupMember.getGroupMember(params);
 	}
 
 	@Field("circles")

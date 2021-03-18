@@ -8,21 +8,22 @@ import com.zpsenior.graphql4j.annotation.Type;
 import lombok.Data;
 
 @Data
-@Type(desc="通知信息表", incr="noticeId")
-public class Notice {
+@Type(desc="用户投票表")
+public class MemberVoting {
 
 	@Field(isKey=true, desc="租户ID")
 	private String tenantId;
 
-	@Field(isKey=true, desc="通知ID")
-	private long noticeId;
+	@Field(isKey=true, desc="用户ID")
+	private long customerId;
 
-	@Field(desc="发送人ID")
-	private long staffId;
+	@Field(isKey=true, desc="投票ID")
+	private long votingId;
 
-	@Field(desc="通知内容")
-	private String content;
+	@Field(isKey=true, desc="投票选择ID")
+	private long choiceId;
 
 	@Field(desc="创建日期")
 	private Date createDate;
+
 }

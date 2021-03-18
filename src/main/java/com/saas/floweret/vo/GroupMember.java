@@ -18,13 +18,19 @@ public class GroupMember {
 	private long groupId;
 
 	@Field(isKey=true, desc="用户ID")
-	private long customerId;
+	private long memberId;
 
 	@Field(desc="成员ID")
 	private long memberNo;
 
+	@Field(desc="介绍人ID")
+	private long introducer;
+
 	@Field(desc="成员昵称")
 	private long memberNickname;
+	
+	@Field(desc="状态")
+	private MemberStatus status;
 	
 	@Field(desc="支付金额")
 	private long payAmount;

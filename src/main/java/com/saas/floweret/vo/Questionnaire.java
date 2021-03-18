@@ -16,7 +16,7 @@ public class Questionnaire {
 	@Field(isKey=true, desc="问题ID")
 	private long questionId;
 
-	@Field(isKey=true, desc="问题类型")
+	@Field(desc="问题类型")
 	private int questionType;
 
 	@Field(desc="问题描述")
